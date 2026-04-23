@@ -5,6 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>the consult.</title>
 <meta name="description" content="A weekly healthcare newsletter. Emerging treatments, AI in healthcare, and paradigm-shifting research — every Sunday.">
+<meta property="og:title" content="the consult. — Where healthcare comes to catch up.">
+<meta property="og:description" content="A growing community of healthcare professionals. Every Sunday, we break down the research, AI tools, and clinical news that actually matter — in 5 minutes.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="/owl-hero.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="the consult. — Where healthcare comes to catch up.">
+<meta name="twitter:description" content="A growing community of healthcare professionals. Every Sunday, we break down the research, AI tools, and clinical news that actually matter — in 5 minutes.">
+<meta name="twitter:image" content="/owl-hero.png">
 <link rel="icon" type="image/png" href="/favicon.png">
 <link rel="apple-touch-icon" href="/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,20 +24,25 @@
 :root {
   --white: #ffffff;
   --bg: #ffffff;
-  --bg-warm: #f0f6fb;
-  --bg-cool: #f5f9fc;
-  --black: #1a2a3a;
-  --text: #1a2a3a;
-  --text-sec: #4a6580;
-  --text-muted: #8ea8c0;
-  --border: #d4e3ef;
-  --border-dark: #b8cfdf;
-  --accent: #5b9bd5;
-  --accent-dark: #4080bf;
-  --accent-light: #e8f1f8;
-  --warm: #5b9bd5;
-  --warm-light: #e8f1f8;
-  --link: #3a7fc4;
+  --bg-warm: #F0F9FF;
+  --bg-cool: #F7FAFC;
+  --black: #0C4A6E;
+  --text: #0C4A6E;
+  --text-sec: #4A6580;
+  --text-muted: #64748B;
+  --border: #BAE6FD;
+  --border-dark: #7DD3FC;
+  --accent: #0369A1;
+  --accent-dark: #075985;
+  --accent-light: #E0F2FE;
+  --warm: #EA580C;
+  --warm-light: #FFF7ED;
+  --link: #0369A1;
+  --cta: #EA580C;
+  --cta-dark: #C2410C;
+  --cta-light: #FFF7ED;
+  --success: #059669;
+  --destructive: #DC2626;
 
   --font: 'DM Sans', -apple-system, sans-serif;
   --font-display: 'Sora', var(--font);
@@ -53,6 +66,8 @@ button { cursor:pointer; border:none; background:none; font-family:inherit; }
 @keyframes pulse { 0%,100%{opacity:1;}50%{opacity:0.4;} }
 @keyframes blink { 0%,100%{opacity:1;}50%{opacity:0;} }
 
+.sr-only { position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0; }
+:focus-visible { outline:3px solid var(--accent); outline-offset:2px; }
 .anim { opacity:0; transform:translateY(16px); transition:all 0.5s var(--ease); }
 .anim.vis { opacity:1; transform:translateY(0); }
 
@@ -80,10 +95,10 @@ button { cursor:pointer; border:none; background:none; font-family:inherit; }
 .nav-right { display:flex; align-items:center; gap:0.75rem; }
 .btn-sub {
   font-family:var(--font-display); font-size:0.8rem; font-weight:600;
-  color:var(--white); background:var(--accent);
-  padding:0.48rem 1.15rem; border-radius:6px; transition:all 0.15s;
+  color:var(--white); background:var(--cta);
+  padding:0.48rem 1.15rem; border-radius:8px; transition:all 0.15s;
 }
-.btn-sub:hover { background:var(--accent-dark); }
+.btn-sub:hover { background:var(--cta-dark); }
 
 .nav-toggle { display:none; flex-direction:column; gap:4px; padding:6px; }
 .nav-toggle span { width:18px; height:2px; background:var(--black); }
@@ -100,18 +115,18 @@ button { cursor:pointer; border:none; background:none; font-family:inherit; }
 
 /* ========== TICKER ========== */
 .ticker {
-  background:var(--black); height:32px; overflow:hidden; position:relative;
+  background:var(--accent-dark); height:32px; overflow:hidden; position:relative;
 }
 .ticker-flag {
   position:absolute; left:0; top:0; height:100%;
-  background:var(--accent); color:var(--white);
+  background:var(--cta); color:var(--white);
   font-family:var(--font-display); font-size:0.58rem; font-weight:700;
   text-transform:uppercase; letter-spacing:0.1em;
   padding:0 0.85rem; display:flex; align-items:center; gap:6px; z-index:2;
 }
 .ticker-flag::after {
   content:''; position:absolute; right:-8px; top:0;
-  border-left:8px solid var(--accent);
+  border-left:8px solid var(--cta);
   border-top:16px solid transparent; border-bottom:16px solid transparent;
 }
 .ticker-track {
@@ -199,7 +214,7 @@ button { cursor:pointer; border:none; background:none; font-family:inherit; }
 .features-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.25rem; }
 @media(max-width:768px){ .features-grid{grid-template-columns:1fr;} }
 .feature-card {
-  padding:1.35rem; border:1px solid var(--border); border-radius:10px;
+  padding:1.35rem; border:1px solid var(--border); border-radius:12px;
   transition:all 0.2s var(--ease);
 }
 .feature-card:hover { border-color:var(--border-dark); box-shadow:0 2px 12px rgba(0,0,0,0.04); }
@@ -219,7 +234,7 @@ button { cursor:pointer; border:none; background:none; font-family:inherit; }
 @media(max-width:900px){ .posts-grid{grid-template-columns:repeat(2,1fr);} }
 @media(max-width:600px){ .posts-grid{grid-template-columns:1fr;} }
 .post-card {
-  border:1px solid var(--border); border-radius:10px; overflow:hidden;
+  border:1px solid var(--border); border-radius:12px; overflow:hidden;
   transition:all 0.2s var(--ease); display:flex; flex-direction:column;
 }
 .post-card:hover { border-color:var(--border-dark); box-shadow:0 4px 20px rgba(0,0,0,0.06); transform:translateY(-2px); }
@@ -274,7 +289,7 @@ button { cursor:pointer; border:none; background:none; font-family:inherit; }
 .cta-section { padding:3.5rem 1.5rem; }
 .cta-box {
   max-width:960px; margin:0 auto;
-  background:var(--black); border-radius:10px;
+  background:var(--accent); border-radius:12px;
   padding:3rem 2rem; text-align:center; color:var(--white);
 }
 .cta-box h2 {
@@ -282,7 +297,7 @@ button { cursor:pointer; border:none; background:none; font-family:inherit; }
   margin-bottom:0.5rem;
 }
 .cta-box p {
-  font-size:0.9rem; color:var(--border); max-width:420px;
+  font-size:0.9rem; color:rgba(255,255,255,0.85); max-width:420px;
   margin:0 auto 1.5rem; line-height:1.65;
 }
 .btn-sub-light {
@@ -344,8 +359,8 @@ button { cursor:pointer; border:none; background:none; font-family:inherit; }
 .adv-item { display:flex; gap:0.75rem; margin-bottom:1.25rem; align-items:flex-start; }
 .adv-num {
   font-family:var(--font-display); font-size:0.68rem; font-weight:700;
-  width:24px; height:24px; border-radius:6px; background:var(--accent-light);
-  color:var(--accent); display:flex; align-items:center; justify-content:center;
+  width:24px; height:24px; border-radius:6px; background:var(--cta-light);
+  color:var(--cta); display:flex; align-items:center; justify-content:center;
   flex-shrink:0; margin-top:2px;
 }
 .adv-item h3 { font-family:var(--font-display); font-size:0.85rem; font-weight:700; color:var(--black); margin-bottom:2px; }
@@ -363,10 +378,10 @@ button { cursor:pointer; border:none; background:none; font-family:inherit; }
 .fg textarea { resize:vertical; min-height:80px; }
 .form-btn {
   width:100%; padding:0.65rem; font-family:var(--font-display); font-size:0.8rem; font-weight:600;
-  color:var(--white); background:var(--accent); border-radius:6px;
+  color:var(--white); background:var(--cta); border-radius:8px;
   transition:background 0.15s; margin-top:0.4rem;
 }
-.form-btn:hover { background:var(--accent-dark); }
+.form-btn:hover { background:var(--cta-dark); }
 
 /* ========== ABOUT ========== */
 .about-header { padding:3rem 1.5rem 1.5rem; max-width:var(--max-w-wide); margin:0 auto; }
@@ -395,15 +410,15 @@ button { cursor:pointer; border:none; background:none; font-family:inherit; }
 .pillars-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.25rem; }
 @media(max-width:768px){ .pillars-grid{grid-template-columns:1fr;} }
 .pillar-card {
-  padding:1.5rem; border:1px solid var(--border); border-radius:10px;
+  padding:1.5rem; border:1px solid var(--border); border-radius:12px;
   background:var(--white);
   transition:all 0.2s var(--ease);
 }
 .pillar-card:hover { border-color:var(--border-dark); box-shadow:0 2px 12px rgba(0,0,0,0.04); }
 .pillar-num {
   font-family:var(--font-display); font-size:0.68rem; font-weight:700;
-  width:26px; height:26px; border-radius:6px; background:var(--accent-light);
-  color:var(--accent); display:flex; align-items:center; justify-content:center;
+  width:26px; height:26px; border-radius:6px; background:var(--cta-light);
+  color:var(--cta); display:flex; align-items:center; justify-content:center;
   margin-bottom:0.85rem;
 }
 .pillar-card h3 {
@@ -414,11 +429,11 @@ button { cursor:pointer; border:none; background:none; font-family:inherit; }
 
 /* ========== TEAM ========== */
 .team-section { background:var(--bg-cool); border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
-.team-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.25rem; }
-@media(max-width:900px){ .team-grid{grid-template-columns:1fr;} }
+.team-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1.5rem; max-width:760px; margin:0 auto; }
+@media(max-width:700px){ .team-grid{grid-template-columns:1fr;} }
 .team-card {
   background:var(--white);
-  border:1px solid var(--border); border-radius:10px;
+  border:1px solid var(--border); border-radius:12px;
   padding:1.75rem 1.5rem; text-align:center;
   transition:all 0.2s var(--ease);
   display:flex; flex-direction:column; align-items:center;
@@ -522,13 +537,14 @@ button { cursor:pointer; border:none; background:none; font-family:inherit; }
       <p class="hero-sub">A growing community of healthcare professionals who want to stay ahead. Every Sunday, we break down the research, AI tools, and clinical news that actually matter, in 5 minutes.</p>
       <div class="hero-cta-row" id="subscribe">
         <form id="subscribeForm" style="display:flex;gap:0.5rem;flex-wrap:wrap;justify-content:center;align-items:center;max-width:460px;margin:0 auto;">
-          <input type="email" id="sub-email" placeholder="Enter your email" required
-            style="flex:1;min-width:220px;padding:0.75rem 1rem;border:1px solid var(--border-dark);border-radius:6px;
+          <label for="sub-email" class="sr-only">Email address</label>
+          <input type="email" id="sub-email" placeholder="Enter your email" required aria-label="Email address"
+            style="flex:1;min-width:220px;padding:0.75rem 1rem;border:1.5px solid var(--border-dark);border-radius:8px;
             font-family:var(--font);font-size:0.9rem;color:var(--black);background:var(--white);
-            outline:none;transition:border-color 0.15s;">
+            outline:none;transition:border-color 0.15s, box-shadow 0.15s;">
           <button type="submit" id="sub-btn"
             style="font-family:var(--font-display);font-size:0.85rem;font-weight:600;
-            color:var(--white);background:var(--accent);padding:0.75rem 1.5rem;border-radius:6px;
+            color:var(--white);background:var(--cta);padding:0.75rem 1.5rem;border-radius:8px;
             border:none;cursor:pointer;transition:background 0.15s;white-space:nowrap;">
             Subscribe For Free →
           </button>
@@ -591,6 +607,10 @@ button { cursor:pointer; border:none; background:none; font-family:inherit; }
   </div></section>
   <section class="arch-results"><div style="max-width:var(--max-w-wide);margin:0 auto;">
     <div class="arch-grid" id="agrid"></div>
+    <div class="empty-state" id="filterEmpty" style="display:none;">
+      <h3>No issues in this category yet</h3>
+      <p>Try a different filter or <a onclick="document.querySelector('.ac[data-f=all]').click()">view all issues</a>.</p>
+    </div>
     <div class="empty-state" id="archiveEmpty">
       <h3>No issues yet</h3>
       <p>Issue #01 is in production. <a onclick="go('home','subscribe')">Subscribe</a> to get it when it drops.</p>
@@ -612,11 +632,11 @@ button { cursor:pointer; border:none; background:none; font-family:inherit; }
     <div class="adv-form anim">
       <h2>Get in touch</h2>
       <form id="advForm">
-        <div class="fg"><label>Full Name</label><input type="text" id="adv-name" placeholder="Jane Smith" required></div>
-        <div class="fg"><label>Work Email</label><input type="email" id="adv-email" placeholder="jane@company.com" required></div>
-        <div class="fg"><label>Company</label><input type="text" id="adv-company" placeholder="Acme Pharma" required></div>
-        <div class="fg"><label>Budget</label><select id="adv-budget"><option value="">Select range</option><option>Under $5K</option><option>$5K – $15K</option><option>$15K – $50K</option><option>$50K+</option></select></div>
-        <div class="fg"><label>Details</label><textarea id="adv-message" placeholder="What are you promoting? Tell us about your campaign."></textarea></div>
+        <div class="fg"><label for="adv-name">Full Name</label><input type="text" id="adv-name" placeholder="Jane Smith" required></div>
+        <div class="fg"><label for="adv-email">Work Email</label><input type="email" id="adv-email" placeholder="jane@company.com" required></div>
+        <div class="fg"><label for="adv-company">Company</label><input type="text" id="adv-company" placeholder="Acme Pharma" required></div>
+        <div class="fg"><label for="adv-budget">Budget</label><select id="adv-budget"><option value="">Select range</option><option>Under $5K</option><option>$5K – $15K</option><option>$15K – $50K</option><option>$50K+</option></select></div>
+        <div class="fg"><label for="adv-message">Details</label><textarea id="adv-message" placeholder="What are you promoting? Tell us about your campaign."></textarea></div>
         <button type="submit" class="form-btn">Send Inquiry →</button>
       </form>
     </div>
@@ -633,10 +653,10 @@ button { cursor:pointer; border:none; background:none; font-family:inherit; }
     <div class="adv-form anim">
       <h2>Tell us what happened</h2>
       <form id="storyForm">
-        <div class="fg"><label>Your Name</label><input type="text" id="story-name" placeholder="Jane Smith" required></div>
-        <div class="fg"><label>Email</label><input type="email" id="story-email" placeholder="jane@hospital.com" required></div>
-        <div class="fg"><label>Your Role</label><input type="text" id="story-role" placeholder="RN, MD, PA, Pharmacist, etc."></div>
-        <div class="fg"><label>Your Story</label><textarea id="story-message" placeholder="What happened? What did you observe? What's your take?" style="min-height:140px;" required></textarea></div>
+        <div class="fg"><label for="story-name">Your Name</label><input type="text" id="story-name" placeholder="Jane Smith" required></div>
+        <div class="fg"><label for="story-email">Email</label><input type="email" id="story-email" placeholder="jane@hospital.com" required></div>
+        <div class="fg"><label for="story-role">Your Role</label><input type="text" id="story-role" placeholder="RN, MD, PA, Pharmacist, etc."></div>
+        <div class="fg"><label for="story-message">Your Story</label><textarea id="story-message" placeholder="What happened? What did you observe? What's your take?" style="min-height:140px;" required></textarea></div>
         <div class="fg" style="display:flex;align-items:center;gap:8px;">
           <input type="checkbox" id="story-anon" style="width:auto;">
           <label for="story-anon" style="margin:0;text-transform:none;font-family:var(--font);font-size:0.8rem;color:var(--text-sec);">Keep my name anonymous if published</label>
@@ -694,15 +714,6 @@ button { cursor:pointer; border:none; background:none; font-family:inherit; }
     <div class="about-section-inner">
       <h2 class="anim">The team</h2>
       <div class="team-grid">
-
-        <div class="team-card anim">
-          <div class="team-photo">
-            <span class="team-photo-placeholder">TC</span>
-          </div>
-          <h3></h3>
-          <div class="team-role">Co-Founder</div>
-          <p class="team-bio"></p>
-        </div>
 
         <div class="team-card anim">
           <div class="team-photo">
@@ -871,7 +882,14 @@ document.getElementById('achips').addEventListener('click',e=>{
   document.querySelectorAll('.ac').forEach(c=>c.classList.remove('act'));
   e.target.classList.add('act');
   const f=e.target.dataset.f;
-  document.querySelectorAll('.acard').forEach(c=>{c.style.display=(f==='all'||c.dataset.t.includes(f))?'flex':'none';});
+  let visible = 0;
+  document.querySelectorAll('.acard').forEach(c=>{
+    const show = f==='all'||c.dataset.t.includes(f);
+    c.style.display = show ? 'flex' : 'none';
+    if (show) visible++;
+  });
+  const filterEmpty = document.getElementById('filterEmpty');
+  if (filterEmpty) filterEmpty.style.display = visible === 0 ? 'flex' : 'none';
 });
 
 const advForm = document.getElementById('advForm');
@@ -888,7 +906,7 @@ if (advForm) {
     window.location.href = `mailto:${SITE_CONFIG.contactEmail}?subject=${subject}&body=${body}`;
     const b = this.querySelector('.form-btn');
     b.textContent = "Opening email client...";
-    b.style.background = '#4080bf'; b.style.color = '#fff';
+    b.style.background = '#059669'; b.style.color = '#fff';
     setTimeout(() => { b.textContent = 'Send Inquiry →'; b.style.background = ''; b.style.color = ''; this.reset(); }, 3000);
   });
 }
@@ -914,7 +932,7 @@ if (subForm) {
       });
       if (res.ok || res.status === 201 || res.status === 200) {
         btn.textContent = "You're in ✓";
-        btn.style.background = '#00933C';
+        btn.style.background = '#059669';
         msg.textContent = 'Check your inbox — your first issue arrives Sunday.';
         msg.style.color = 'var(--accent-dark)';
         msg.style.display = 'block';
@@ -945,7 +963,7 @@ if (storyForm) {
     window.location.href = `mailto:${SITE_CONFIG.contactEmail}?subject=${subject}&body=${body}`;
     const b = this.querySelector('.form-btn');
     b.textContent = "Story submitted!";
-    b.style.background = '#4080bf'; b.style.color = '#fff';
+    b.style.background = '#059669'; b.style.color = '#fff';
     setTimeout(() => { b.textContent = 'Submit Story →'; b.style.background = ''; b.style.color = ''; this.reset(); }, 3000);
   });
 }
