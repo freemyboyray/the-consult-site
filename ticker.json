@@ -1,0 +1,10 @@
+{
+  "updated": "2026-04-16T14:30:00Z",
+  "headlines": [
+    { "category": "BREAKING", "color": "#E03C31", "text": "Trump imposes 100% tariff on patented pharmaceutical imports under Section 232" },
+    { "category": "RESEARCH", "color": "#E8A317", "text": "NEJM publishes Phase 3 ATTAIN-1 results showing 11.2% weight loss on oral GLP-1 orforglipron" },
+    { "category": "AI UPDATE", "color": "#00B67A", "text": "Mass General Brigham reports 21% burnout reduction after 84 days using ambient AI scribes" },
+    { "category": "POLICY", "color": "#0066FF", "text": "CMS finalizes 2027 Medicare Advantage rule, removing Star Ratings measures on appeals and complaints" },
+    { "category": "PHARMA", "color": "#7B61FF", "text": "Eli Lilly's Foundayo wins FDA approval as first oral GLP-1 with no food or water restrictions" }
+  ]
+}

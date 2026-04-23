@@ -1,0 +1,21 @@
+{
+  "version": 2,
+  "builds": [
+    { "src": "api/posts.js", "use": "@vercel/node" },
+    { "src": "index.html", "use": "@vercel/static" },
+    { "src": "logo.png", "use": "@vercel/static" },
+    { "src": "owl-hero.png", "use": "@vercel/static" },
+    { "src": "ray.jpg", "use": "@vercel/static" },
+    { "src": "ibrahim.png", "use": "@vercel/static" },
+    { "src": "ticker.json", "use": "@vercel/static" }
+  ],
+  "routes": [
+    { "src": "/api/posts", "dest": "/api/posts.js" },
+    { "src": "/logo.png", "dest": "/logo.png" },
+    { "src": "/owl-hero.png", "dest": "/owl-hero.png" },
+    { "src": "/ray.jpg", "dest": "/ray.jpg" },
+    { "src": "/ibrahim.png", "dest": "/ibrahim.png" },
+    { "src": "/ticker.json", "dest": "/ticker.json" },
+    { "src": "/(.*)", "dest": "/index.html" }
+  ]
+}
