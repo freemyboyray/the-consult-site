@@ -115,34 +115,37 @@ button { cursor:pointer; border:none; background:none; font-family:inherit; }
   .nav-link{padding:0.6rem 0;width:100%;border-radius:0;border-bottom:1px solid var(--border);}
 }
 
-/* ========== TICKER ========== */
-.ticker {
-  background:var(--accent-dark); height:32px; overflow:hidden; position:relative;
+/* ========== HEADLINE ROTATOR ========== */
+.headline-bar {
+  border-bottom:1px solid var(--border);
+  height:36px; overflow:hidden; position:relative;
+  display:flex; align-items:center; justify-content:center;
 }
-.ticker-flag {
-  position:absolute; left:0; top:0; height:100%;
-  background:var(--cta); color:var(--white);
-  font-family:var(--font-display); font-size:0.58rem; font-weight:700;
-  text-transform:uppercase; letter-spacing:0.1em;
-  padding:0 0.85rem; display:flex; align-items:center; gap:6px; z-index:2;
+.headline-bar-inner {
+  max-width:var(--max-w-wide); width:100%; margin:0 auto;
+  padding:0 1.5rem; position:relative; height:100%;
+  display:flex; align-items:center; justify-content:center;
 }
-.ticker-flag::after {
-  content:''; position:absolute; right:-8px; top:0;
-  border-left:8px solid var(--cta);
-  border-top:16px solid transparent; border-bottom:16px solid transparent;
+.headline-slide {
+  position:absolute; inset:0;
+  display:flex; align-items:center; justify-content:center; gap:8px;
+  opacity:0; transition:opacity 0.6s ease;
+  pointer-events:none;
 }
-.ticker-track {
-  display:flex; align-items:center; height:100%;
-  padding-left:90px; animation:ticker 40s linear infinite;
+.headline-slide.active { opacity:1; pointer-events:auto; }
+.headline-cat {
+  font-family:var(--font); font-size:0.62rem; font-weight:600;
+  text-transform:uppercase; letter-spacing:0.08em;
+  color:var(--text-muted);
 }
-.ticker-item {
-  white-space:nowrap; font-size:0.68rem; font-weight:500;
-  color:rgba(255,255,255,0.6); padding:0 2.5rem;
-  display:flex; align-items:center; gap:0.6rem;
-  font-family:var(--font-display); letter-spacing:0.02em;
+.headline-text {
+  font-family:var(--font-display); font-size:0.75rem; font-weight:500;
+  color:var(--text-sec); letter-spacing:0.01em;
 }
-.ticker-item .td { width:5px; height:5px; border-radius:50%; flex-shrink:0; }
-.ticker-item strong { color:var(--white); font-weight:700; }
+.headline-sep {
+  width:3px; height:3px; border-radius:50%; background:var(--border-dark);
+  flex-shrink:0;
+}
 
 /* ========== PAGES ========== */
 .page { display:none; }
@@ -597,10 +600,9 @@ button { cursor:pointer; border:none; background:none; font-family:inherit; }
   </div>
 </nav>
 
-<!-- TICKER -->
-<div class="ticker">
-  <div class="ticker-flag"><div style="width:5px;height:5px;border-radius:50%;background:var(--white);animation:pulse 2s infinite;"></div> LIVE</div>
-  <div class="ticker-track" id="tickerTrack"></div>
+<!-- HEADLINE ROTATOR -->
+<div class="headline-bar">
+  <div class="headline-bar-inner" id="headlineRotator"></div>
 </div>
 
 <!-- ===== HOME ===== -->
@@ -994,23 +996,34 @@ async function loadBeehiivPosts() {
 }
 window.addEventListener('DOMContentLoaded', () => loadBeehiivPosts());
 
-/* Ticker */
+/* Headline rotator */
 const DEFAULT_HEADLINES = [
-  { category:'BREAKING', color:'#E03C31', text:'FDA fast-tracks novel Alzheimer\'s antibody to priority review' },
-  { category:'AI', color:'#00B67A', text:'Ambient scribe adoption hits 40% across major health systems' },
-  { category:'POLICY', color:'#0066FF', text:'CMS finalizes 2026 telehealth permanent coverage rules' },
-  { category:'RESEARCH', color:'#E8A317', text:'GLP-1 agonists show neuroprotective signal in Phase II trial' },
-  { category:'DEVICE', color:'#7B61FF', text:'Wearable ECG gains FDA clearance for AFib history feature' },
+  { category:'BREAKING', text:'FDA fast-tracks novel Alzheimer\'s antibody to priority review' },
+  { category:'AI', text:'Ambient scribe adoption hits 40% across major health systems' },
+  { category:'POLICY', text:'CMS finalizes 2026 telehealth permanent coverage rules' },
+  { category:'RESEARCH', text:'GLP-1 agonists show neuroprotective signal in Phase II trial' },
+  { category:'DEVICE', text:'Wearable ECG gains FDA clearance for AFib history feature' },
 ];
-function renderTicker(headlines) {
-  const track = document.getElementById('tickerTrack');
-  if (!track) return;
-  const items = [...headlines, ...headlines];
-  track.innerHTML = items.map(h =>
-    `<div class="ticker-item"><div class="td" style="background:${h.color};"></div><strong>${h.category}</strong> ${h.text}</div>`
+function renderHeadlines(headlines) {
+  const container = document.getElementById('headlineRotator');
+  if (!container) return;
+  container.innerHTML = headlines.map((h, i) =>
+    `<div class="headline-slide${i === 0 ? ' active' : ''}">
+      <span class="headline-cat">${h.category}</span>
+      <span class="headline-sep"></span>
+      <span class="headline-text">${h.text}</span>
+    </div>`
   ).join('');
+  let current = 0;
+  const slides = container.querySelectorAll('.headline-slide');
+  if (slides.length <= 1) return;
+  setInterval(() => {
+    slides[current].classList.remove('active');
+    current = (current + 1) % slides.length;
+    slides[current].classList.add('active');
+  }, 5000);
 }
-fetch('ticker.json').then(r => r.ok ? r.json() : Promise.reject()).then(data => renderTicker(data.headlines || DEFAULT_HEADLINES)).catch(() => renderTicker(DEFAULT_HEADLINES));
+fetch('ticker.json').then(r => r.ok ? r.json() : Promise.reject()).then(data => renderHeadlines(data.headlines || DEFAULT_HEADLINES)).catch(() => renderHeadlines(DEFAULT_HEADLINES));
 
 /* Routing */
 function go(p,s){
