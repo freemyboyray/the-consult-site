@@ -188,31 +188,26 @@
 </main>
 
 <!-- SUBSCRIBE CTA -->
-<section class="issue-subscribe-cta">
-  <div class="issue-subscribe-cta-inner">
+<section class="cta-section">
+  <div class="cta-box">
     <h2>Don't miss the next issue.</h2>
     <p>Free. Every Sunday morning. The healthcare news you'll actually finish reading.</p>
-    <form id="subscribeForm" class="issue-subscribe-form">
+    <form id="subscribeForm" style="display:flex;gap:0.5rem;flex-wrap:wrap;align-items:center;justify-content:center;max-width:460px;margin:0 auto;">
       <label for="sub-email" class="sr-only">Email address</label>
-      <input type="email" id="sub-email" placeholder="Enter your email" required aria-label="Email address">
-      <button type="submit" id="sub-btn">Subscribe</button>
+      <input type="email" id="sub-email" placeholder="Enter your email" required aria-label="Email address"
+        style="flex:1;min-width:220px;padding:0.75rem 1rem;border:1px solid rgba(255,255,255,0.3);border-radius:0;
+        font-family:var(--font);font-size:0.85rem;color:var(--white);background:rgba(255,255,255,0.1);
+        outline:none;transition:border-color 0.2s;">
+      <button type="submit" id="sub-btn" class="btn-sub-light">Subscribe</button>
     </form>
-    <p id="sub-msg" class="issue-subscribe-msg"></p>
+    <p id="sub-msg" style="font-size:0.75rem;color:rgba(255,255,255,0.7);margin-top:0.75rem;display:none;"></p>
   </div>
 </section>
 
 <!-- ISSUE NAV -->
 <nav class="issue-nav" aria-label="Issue navigation">
-  <div class="issue-nav-inner">
-    <span class="issue-nav-link issue-nav-prev disabled" aria-disabled="true">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-      Previous Issue
-    </span>
-    <a class="issue-nav-link issue-nav-next" href="/issues/02">
-      Next Issue
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-    </a>
-  </div>
+  <span class="issue-nav-prev" style="opacity:0.3;cursor:default;" aria-disabled="true">Previous Issue</span>
+  <a class="issue-nav-next" href="/issues/02">Next Issue</a>
 </nav>
 
 <!-- FOOTER -->

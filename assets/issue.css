@@ -252,52 +252,10 @@
   line-height: 1.8;
 }
 
-/* ---------- Subscribe CTA ---------- */
+/* ---------- Issue Subscribe CTA (uses shared .cta-section/.cta-box) ---------- */
 
-.issue-cta {
-  max-width: var(--max-w);
-  margin: 0 auto;
-  padding: 4rem 1.5rem;
-  text-align: center;
-  border-top: 1px solid var(--border);
-}
-
-.issue-cta h3 {
-  font-family: var(--font-display);
-  font-size: 1.5rem;
-  font-weight: 500;
-  color: var(--black);
-  margin-bottom: 0.75rem;
-}
-
-.issue-cta p {
-  font-family: var(--font);
-  font-size: 0.85rem;
-  color: var(--text-muted);
-  line-height: 1.6;
-  margin-bottom: 2rem;
-}
-
-.issue-cta a,
-.issue-cta button {
-  display: inline-block;
-  font-family: var(--font);
-  font-size: 0.8rem;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--white);
-  background: var(--black);
-  border: none;
-  padding: 0.9rem 2.5rem;
-  cursor: pointer;
-  text-decoration: none;
-  transition: background 0.2s ease;
-}
-
-.issue-cta a:hover,
-.issue-cta button:hover {
-  background: var(--warm);
+.cta-box input::placeholder {
+  color: rgba(255,255,255,0.5);
 }
 
 /* ---------- Issue Navigation ---------- */
@@ -305,14 +263,15 @@
 .issue-nav {
   max-width: var(--max-w);
   margin: 0 auto;
-  padding: 3rem 1.5rem 4rem;
+  padding: 2.5rem 1.5rem 3rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
   border-top: 1px solid var(--border);
 }
 
-.issue-nav a {
+.issue-nav a,
+.issue-nav span {
   font-family: var(--font);
   font-size: 0.75rem;
   font-weight: 500;
@@ -327,11 +286,11 @@
   color: var(--black);
 }
 
-.issue-nav .issue-nav-prev::before {
+.issue-nav-prev::before {
   content: "\2190\00a0\00a0";
 }
 
-.issue-nav .issue-nav-next::after {
+.issue-nav-next::after {
   content: "\00a0\00a0\2192";
 }
 
@@ -354,15 +313,7 @@
     padding-top: 0;
   }
 
-  .issue-cta {
-    padding: 3rem 1rem;
-  }
-
   .issue-nav {
     padding: 2rem 1rem 3rem;
-    flex-direction: column;
-    gap: 1.5rem;
-    align-items: stretch;
-    text-align: center;
   }
 }
