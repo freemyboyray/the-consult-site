@@ -8,10 +8,12 @@
     { "src": "sketch-bg.png", "use": "@vercel/static" },
     { "src": "ray.jpg", "use": "@vercel/static" },
     { "src": "ibrahim.png", "use": "@vercel/static" },
-    { "src": "ticker.json", "use": "@vercel/static" }
+    { "src": "ticker.json", "use": "@vercel/static" },
+    { "src": "favicon.png", "use": "@vercel/static" }
   ],
   "routes": [
     { "src": "/api/posts", "dest": "/api/posts.js" },
+    { "src": "/favicon.png", "dest": "/favicon.png" },
     { "src": "/logo.png", "dest": "/logo.png" },
     { "src": "/owl-hero.png", "dest": "/owl-hero.png" },
     { "src": "/sketch-bg.png", "dest": "/sketch-bg.png" },

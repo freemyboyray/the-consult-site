@@ -562,16 +562,14 @@ button { cursor:pointer; border:none; background:none; font-family:inherit; }
   border-color:var(--border-dark);
   box-shadow:0 2px 12px rgba(0,0,0,0.04);
 }
-.inside-card-header {
-  display:flex; align-items:center; gap:10px;
-  margin-bottom:0.5rem;
-}
-.inside-dot {
-  width:14px; height:14px; border-radius:3px; flex-shrink:0;
+.inside-card-num {
+  font-family:var(--font-display); font-size:0.68rem; font-weight:700;
+  color:var(--text-muted); margin-bottom:0.6rem;
+  letter-spacing:0.04em;
 }
 .inside-card h3 {
   font-family:var(--font-display); font-size:0.95rem; font-weight:700;
-  color:var(--black);
+  color:var(--black); margin-bottom:0.35rem;
 }
 .inside-card p {
   font-size:0.8rem; color:var(--text-sec); line-height:1.6;
@@ -584,7 +582,7 @@ button { cursor:pointer; border:none; background:none; font-family:inherit; }
 <nav class="nav">
   <div class="nav-inner">
     <a class="nav-logo" onclick="go('home')">
-      <img src="/logo.png" alt="the consult." style="height:32px;width:auto;">
+      <img src="/logo.png" alt="the consult." style="height:58px;width:auto;">
     </a>
     <div class="nav-center" id="nc">
       <a class="nav-link" onclick="go('home')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg> Home</a>
@@ -689,50 +687,38 @@ button { cursor:pointer; border:none; background:none; font-family:inherit; }
     <div class="inside-grid">
 
       <div class="inside-card anim">
-        <div class="inside-card-header">
-          <div class="inside-dot" style="background:#B8860B;"></div>
-          <h3>The Opening</h3>
-        </div>
+        <div class="inside-card-num">01</div>
+        <h3>The Opening</h3>
         <p>A warm, signed note to start your Sunday. Sets the mood for the week ahead.</p>
       </div>
 
       <div class="inside-card anim">
-        <div class="inside-card-header">
-          <div class="inside-dot" style="background:#E03C31;"></div>
-          <h3>From the Field</h3>
-        </div>
+        <div class="inside-card-num">02</div>
+        <h3>From the Field</h3>
         <p>Three reader-submitted stories from the frontlines. De-identified, consented, rotated across roles.</p>
       </div>
 
       <div class="inside-card anim">
-        <div class="inside-card-header">
-          <div class="inside-dot" style="background:#1E3A5F;"></div>
-          <h3>The Consult</h3>
-        </div>
+        <div class="inside-card-num">03</div>
+        <h3>The Consult</h3>
         <p>A signed weekly column. An attending's honest reflection on the craft of medicine.</p>
       </div>
 
       <div class="inside-card anim">
-        <div class="inside-card-header">
-          <div class="inside-dot" style="background:#00B67A;"></div>
-          <h3>Vitals</h3>
-        </div>
+        <div class="inside-card-num">04</div>
+        <h3>Vitals</h3>
         <p>Four news items worth knowing. Research, AI, clinical, and policy, each with a one-line editorial take.</p>
       </div>
 
       <div class="inside-card anim">
-        <div class="inside-card-header">
-          <div class="inside-dot" style="background:#7B61FF;"></div>
-          <h3>Rounds</h3>
-        </div>
+        <div class="inside-card-num">05</div>
+        <h3>Rounds</h3>
         <p>One person worth knowing. A real clinician, researcher, or builder shaping where healthcare is headed.</p>
       </div>
 
       <div class="inside-card anim">
-        <div class="inside-card-header">
-          <div class="inside-dot" style="background:#0066FF;"></div>
-          <h3>Differential</h3>
-        </div>
+        <div class="inside-card-num">06</div>
+        <h3>Differential</h3>
         <p>A curious question in medicine answered warmly and accurately. Smart humor, never at a patient's expense.</p>
       </div>
 
@@ -917,7 +903,7 @@ button { cursor:pointer; border:none; background:none; font-family:inherit; }
 <footer class="footer">
   <div class="footer-inner">
     <div class="footer-brand">
-      <img src="/logo.png" alt="the consult." style="height:22px;width:auto;">
+      <img src="/logo.png" alt="the consult." style="height:42px;width:auto;">
     </div>
     <div class="footer-links">
       <a onclick="go('home')">Home</a>
