@@ -32,15 +32,15 @@
   --text-muted: #78716C;
   --border: #D6D3D1;
   --border-dark: #A8A29E;
-  --accent: #1E3A5F;
-  --accent-dark: #152C4A;
-  --accent-light: #EEF2F7;
-  --warm: #B8860B;
+  --accent: #1C1917;
+  --accent-dark: #0C0A09;
+  --accent-light: #F5F5F0;
+  --warm: #A16207;
   --warm-light: #FDF8EF;
-  --link: #1E3A5F;
+  --link: #1C1917;
   --cta: #1C1917;
   --cta-dark: #0C0A09;
-  --cta-light: #EEF2F7;
+  --cta-light: #F5F5F0;
   --success: #059669;
   --destructive: #DC2626;
 
@@ -168,12 +168,6 @@ button { cursor:pointer; border:none; background:none; font-family:inherit; }
   letter-spacing:-0.01em;
   color:var(--black); margin:0;
   font-style:italic;
-  display:inline;
-  background-image:linear-gradient(var(--warm), var(--warm));
-  background-size:100% 3px;
-  background-position:0 92%;
-  background-repeat:no-repeat;
-  padding-bottom:4px;
 }
 
 @media (max-width:768px) {
@@ -194,7 +188,7 @@ button { cursor:pointer; border:none; background:none; font-family:inherit; }
 .subscribe-hero-label {
   font-family:var(--font); font-size:0.7rem; font-weight:400;
   text-transform:uppercase; letter-spacing:0.15em;
-  color:var(--accent); margin-bottom:1.2rem;
+  color:var(--text-muted); margin-bottom:1.2rem;
 }
 .subscribe-hero-sub {
   font-size:1.05rem; color:var(--text-sec);
@@ -244,8 +238,7 @@ button { cursor:pointer; border:none; background:none; font-family:inherit; }
 }
 .feature-card:hover { border-color:var(--border-dark); box-shadow:0 2px 12px rgba(0,0,0,0.04); }
 .feature-icon {
-  width:34px; height:34px; border-radius:0; background:var(--accent-light);
-  color:var(--accent);
+  width:34px; height:34px; border-radius:0; background:var(--warm-light);
   display:flex; align-items:center; justify-content:center;
   margin-bottom:0.75rem; font-size:1rem;
 }
