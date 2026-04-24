@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Archive — the consult.</title>
+<meta name="description" content="Every issue of The Consult. Browse our archive of healthcare news, research, and clinical insights.">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" href="/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/shared.css">
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="/">
+      <img src="/logo.png" alt="the consult." style="height:58px;width:auto;">
+    </a>
+    <div class="nav-center" id="nc">
+      <a class="nav-link" href="/"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg> Home</a>
+      <a class="nav-link" href="/inside"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg> What's Inside</a>
+      <a class="nav-link" href="/archive"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg> Archive</a>
+      <a class="nav-link" href="/advertise"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg> Advertise</a>
+      <a class="nav-link" href="/about"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg> About</a>
+    </div>
+    <div class="nav-right" id="nr">
+      <a class="btn-sub" href="/#subscribe">Subscribe For Free</a>
+    </div>
+    <button class="nav-toggle" onclick="toggleM()" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="headline-bar">
+  <div class="headline-bar-inner" id="headlineRotator"></div>
+</div>
+
+<!-- ARCHIVE HEADER -->
+<div class="arch-header">
+  <h1>Archive</h1>
+  <p>Every issue of The Consult.</p>
+</div>
+
+<!-- FILTERS -->
+<section class="arch-filters">
+  <div class="arch-chips" id="achips">
+    <button class="ac act" data-f="all">All</button>
+    <button class="ac" data-f="horizon">Horizon</button>
+    <button class="ac" data-f="clinical">Clinical</button>
+    <button class="ac" data-f="ai">AI</button>
+    <button class="ac" data-f="research">Research</button>
+    <button class="ac" data-f="field">Field</button>
+  </div>
+</section>
+
+<!-- RESULTS -->
+<section class="arch-results">
+  <div style="max-width:var(--max-w-wide);margin:0 auto;">
+    <div class="arch-grid" id="agrid"></div>
+    <div class="empty-state" id="filterEmpty" style="display:none;">
+      <h3>No issues in this category yet</h3>
+      <p>Try a different filter or <a href="/archive">view all issues</a>.</p>
+    </div>
+    <div class="empty-state" id="archiveEmpty">
+      <h3>No issues yet</h3>
+      <p>Issue #01 is in production. <a href="/#subscribe">Subscribe</a> to get it when it drops.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <img src="/logo.png" alt="the consult." style="height:42px;width:auto;">
+    </div>
+    <div class="footer-links">
+      <a href="/">Home</a>
+      <a href="/inside">What's Inside</a>
+      <a href="/archive">Archive</a>
+      <a href="/advertise">Advertise</a>
+      <a href="/about">About</a>
+    </div>
+    <div class="footer-copy">&copy; 2026 The Consult. All rights reserved.</div>
+  </div>
+</footer>
+
+<script>
+function toggleM(){document.getElementById('nc').classList.toggle('open');document.getElementById('nr').classList.toggle('open');}
+
+const DEFAULT_HEADLINES = [
+  { category:'BREAKING', text:'FDA fast-tracks novel Alzheimer\'s antibody to priority review' },
+  { category:'AI', text:'Ambient scribe adoption hits 40% across major health systems' },
+  { category:'POLICY', text:'CMS finalizes 2026 telehealth permanent coverage rules' },
+  { category:'RESEARCH', text:'GLP-1 agonists show neuroprotective signal in Phase II trial' },
+  { category:'DEVICE', text:'Wearable ECG gains FDA clearance for AFib history feature' },
+];
+function renderHeadlines(headlines) {
+  const container = document.getElementById('headlineRotator');
+  if (!container) return;
+  container.innerHTML = headlines.map((h, i) =>
+    `<div class="headline-slide${i === 0 ? ' active' : ''}">
+      <span class="headline-cat">${h.category}</span>
+      <span class="headline-sep"></span>
+      <span class="headline-text">${h.text}</span>
+    </div>`
+  ).join('');
+  let current = 0;
+  const slides = container.querySelectorAll('.headline-slide');
+  if (slides.length <= 1) return;
+  setInterval(() => {
+    slides[current].classList.remove('active');
+    current = (current + 1) % slides.length;
+    slides[current].classList.add('active');
+  }, 5000);
+}
+fetch('/ticker.json').then(r => r.ok ? r.json() : Promise.reject()).then(data => renderHeadlines(data.headlines || DEFAULT_HEADLINES)).catch(() => renderHeadlines(DEFAULT_HEADLINES));
+
+/* Load archive issues */
+async function loadArchive() {
+  try {
+    const res = await fetch('/issues.json');
+    const issues = await res.json();
+    if (!issues.length) return;
+    const grid = document.getElementById('agrid');
+    const empty = document.getElementById('archiveEmpty');
+    if (empty) empty.style.display = 'none';
+    grid.innerHTML = issues.map((issue, i) => {
+      const num = String(issue.number).padStart(2, '0');
+      const date = new Date(issue.date).toLocaleDateString('en-US', { month:'short', day:'numeric', year:'numeric' });
+      const tags = (issue.tags || []).join(' ') || 'all';
+      const firstTag = (issue.tags && issue.tags[0]) || '';
+      return `<a href="/issues/${issue.slug}" class="acard anim" data-t="${tags}" style="text-decoration:none;color:inherit;">
+        <div class="acard-num">#${num}</div>
+        <div class="acard-c">
+          <h3>${issue.title}</h3>
+          <div class="am">${date}${firstTag ? ' &middot; <span>' + firstTag + '</span>' : ''}</div>
+          <p>${issue.excerpt.length > 140 ? issue.excerpt.slice(0,140) + '...' : issue.excerpt}</p>
+        </div></a>`;
+    }).join('');
+    initA();
+  } catch(e) { console.log('Archive not loaded:', e.message); }
+}
+loadArchive();
+
+/* Filter chips */
+document.getElementById('achips').addEventListener('click', e => {
+  if (!e.target.classList.contains('ac')) return;
+  document.querySelectorAll('.ac').forEach(c => c.classList.remove('act'));
+  e.target.classList.add('act');
+  const f = e.target.dataset.f;
+  let visible = 0;
+  document.querySelectorAll('.acard').forEach(c => {
+    const show = f === 'all' || c.dataset.t.includes(f);
+    c.style.display = show ? 'flex' : 'none';
+    if (show) visible++;
+  });
+  const filterEmpty = document.getElementById('filterEmpty');
+  if (filterEmpty) filterEmpty.style.display = visible === 0 ? 'flex' : 'none';
+});
+
+function initA(){
+  const o=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('vis');});},{threshold:0.1,rootMargin:'0px 0px -30px 0px'});
+  document.querySelectorAll('.anim').forEach(el=>o.observe(el));
+}
+
+(function initAnimations(){
+  const o=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('vis');});},{threshold:0.1,rootMargin:'0px 0px -30px 0px'});
+  document.querySelectorAll('.anim').forEach(el=>o.observe(el));
+})();
+</script>
+</body>
+</html>

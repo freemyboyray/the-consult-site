@@ -3,7 +3,31 @@
     "allow": [
       "Bash(git init:*)",
       "Bash(git add:*)",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "Bash(gh repo:*)",
+      "Bash(git push:*)",
+      "Bash(claude mcp:*)",
+      "Bash(claude skill:*)",
+      "Bash(claude plugin:*)",
+      "Bash(claude install:*)",
+      "Bash(claude plugins:*)",
+      "Bash(gh api:*)",
+      "Bash(python3 -c \"import json,sys; [print\\(x['name'],x['type']\\) for x in json.load\\(sys.stdin\\)]\")",
+      "Bash(mkdir -p /Users/raywade/Desktop/the-consult-site/.claude/skills/ui-ux-pro-max)",
+      "Bash(cp -r /tmp/ui-ux-pro-max-skill/src/ui-ux-pro-max/* /Users/raywade/Desktop/the-consult-site/.claude/skills/ui-ux-pro-max/)",
+      "Bash(python3:*)",
+      "Bash(vercel:*)",
+      "WebSearch",
+      "WebFetch(domain:www.densediscovery.com)",
+      "Read(//Users/raywade/Documents/**)",
+      "Bash(textutil -convert txt \"the_consult_vision_product_roadmap.docx\" -stdout)",
+      "Bash(curl -sI https://theconsult.info/sketch-bg.png)",
+      "Bash(curl -s https://theconsult.info)",
+      "Bash(pkill -f \"python3 -m http.server\")",
+      "Bash(ls:*)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:8080/index.html)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:8080/archive.html)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:8080/issues/01.html)"
     ]
   }
 }

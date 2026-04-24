@@ -18,608 +18,50 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<style>
-*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-
-:root {
-  --white: #ffffff;
-  --bg: #FAFAF9;
-  --bg-warm: #F5F5F0;
-  --bg-cool: #F7F7F5;
-  --black: #1C1917;
-  --text: #1C1917;
-  --text-sec: #44403C;
-  --text-muted: #78716C;
-  --border: #D6D3D1;
-  --border-dark: #A8A29E;
-  --accent: #1C1917;
-  --accent-dark: #0C0A09;
-  --accent-light: #F5F5F0;
-  --warm: #A16207;
-  --warm-light: #FDF8EF;
-  --link: #1C1917;
-  --cta: #1C1917;
-  --cta-dark: #0C0A09;
-  --cta-light: #F5F5F0;
-  --success: #059669;
-  --destructive: #DC2626;
-
-  --font: 'Inter', -apple-system, sans-serif;
-  --font-display: 'Playfair Display', Georgia, serif;
-  --max-w: 720px;
-  --max-w-wide: 1080px;
-  --nav-h: 58px;
-  --ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-html { scroll-behavior:smooth; }
-body {
-  font-family:var(--font); color:var(--text); background:var(--bg);
-  -webkit-font-smoothing:antialiased; line-height:1.75; overflow-x:hidden;
-}
-a { color:inherit; text-decoration:none; }
-button { cursor:pointer; border:none; background:none; font-family:inherit; }
-
-@keyframes fadeUp { from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);} }
-@keyframes fadeIn { from{opacity:0;}to{opacity:1;} }
-@keyframes ticker { 0%{transform:translateX(0);}100%{transform:translateX(-50%);} }
-@keyframes pulse { 0%,100%{opacity:1;}50%{opacity:0.4;} }
-@keyframes blink { 0%,100%{opacity:1;}50%{opacity:0;} }
-
-.sr-only { position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0; }
-:focus-visible { outline:3px solid var(--accent); outline-offset:2px; }
-.anim { opacity:0; transform:translateY(16px); transition:all 0.5s var(--ease); }
-.anim.vis { opacity:1; transform:translateY(0); }
-
-/* ========== NAV ========== */
-.nav {
-  position:sticky; top:0; z-index:1000;
-  background:var(--bg);
-  border-bottom:1px solid var(--border);
-  height:var(--nav-h);
-}
-.nav-inner {
-  max-width:var(--max-w-wide); margin:0 auto; padding:0 1.5rem;
-  height:100%; display:flex; align-items:center; justify-content:space-between;
-}
-.nav-logo { display:flex; align-items:center; gap:10px; cursor:pointer; }
-.nav-center { display:flex; align-items:center; gap:0.15rem; }
-.nav-link {
-  font-size:0.75rem; font-weight:400; color:var(--text-sec);
-  padding:0.4rem 0.75rem; transition:all 0.15s; border-radius:0;
-  display:inline-flex; align-items:center; gap:6px;
-  letter-spacing:0.05em; text-transform:uppercase;
-}
-.nav-link svg { flex-shrink:0; opacity:0.5; transition:opacity 0.15s; }
-.nav-link:hover { color:var(--black); background:var(--bg-cool); }
-.nav-link:hover svg { opacity:0.8; }
-.nav-right { display:flex; align-items:center; gap:0.75rem; }
-.btn-sub {
-  font-family:var(--font); font-size:0.75rem; font-weight:500;
-  letter-spacing:0.08em; text-transform:uppercase;
-  color:var(--white); background:var(--black);
-  padding:0.6rem 1.5rem; border-radius:0; transition:all 0.2s;
-}
-.btn-sub:hover { background:var(--text-sec); }
-
-.nav-toggle { display:none; flex-direction:column; gap:4px; padding:6px; }
-.nav-toggle span { width:18px; height:2px; background:var(--black); }
-@media(max-width:768px){
-  .nav-toggle{display:flex;}
-  .nav-center,.nav-right{display:none;}
-  .nav-center.open,.nav-right.open{
-    display:flex;position:fixed;top:var(--nav-h);left:0;right:0;
-    background:var(--white);flex-direction:column;padding:1rem 1.5rem;
-    border-bottom:1px solid var(--border);gap:0.25rem;z-index:999;
-  }
-  .nav-link{padding:0.6rem 0;width:100%;border-radius:0;border-bottom:1px solid var(--border);}
-}
-
-/* ========== HEADLINE ROTATOR ========== */
-.headline-bar {
-  border-bottom:1px solid var(--border);
-  height:36px; overflow:hidden; position:relative;
-  display:flex; align-items:center; justify-content:center;
-}
-.headline-bar-inner {
-  max-width:var(--max-w-wide); width:100%; margin:0 auto;
-  padding:0 1.5rem; position:relative; height:100%;
-  display:flex; align-items:center; justify-content:center;
-}
-.headline-slide {
-  position:absolute; inset:0;
-  display:flex; align-items:center; justify-content:center; gap:8px;
-  opacity:0; transition:opacity 0.6s ease;
-  pointer-events:none;
-}
-.headline-slide.active { opacity:1; pointer-events:auto; }
-.headline-cat {
-  font-family:var(--font); font-size:0.62rem; font-weight:600;
-  text-transform:uppercase; letter-spacing:0.08em;
-  color:var(--text-muted);
-}
-.headline-text {
-  font-family:var(--font-display); font-size:0.75rem; font-weight:500;
-  color:var(--text-sec); letter-spacing:0.01em;
-}
-.headline-sep {
-  width:3px; height:3px; border-radius:50%; background:var(--border-dark);
-  flex-shrink:0;
-}
-
-/* ========== PAGES ========== */
-.page { display:none; }
-.page.active { display:block; animation:fadeIn 0.25s; }
-
-/* ========== HERO ========== */
-.hero {
-  position:relative;
-  min-height:85vh;
-  display:flex; align-items:center; justify-content:center;
-  background:url('/sketch-bg.png') center center / cover no-repeat;
-  animation:fadeUp 0.6s var(--ease) both;
-}
-.hero-inner {
-  max-width:600px; margin:0 auto; text-align:center;
-  padding:4rem 1.5rem;
-}
-
-.hero h1 {
-  font-family:var(--font-display);
-  font-size:clamp(2.4rem,5.5vw,3.8rem);
-  font-weight:700; line-height:1.15;
-  letter-spacing:-0.01em;
-  color:var(--black); margin:0;
-  font-style:italic;
-}
-
-@media (max-width:768px) {
-  .hero { min-height:60vh; }
-  .hero-inner { padding:3rem 1.5rem; }
-}
-
-/* ========== SUBSCRIBE HERO ========== */
-.subscribe-hero {
-  padding:4.5rem 1.5rem;
-  background:var(--bg);
-  border-bottom:1px solid var(--border);
-  text-align:center;
-}
-.subscribe-hero-inner {
-  max-width:520px; margin:0 auto;
-}
-.subscribe-hero-label {
-  font-family:var(--font); font-size:0.7rem; font-weight:400;
-  text-transform:uppercase; letter-spacing:0.15em;
-  color:var(--text-muted); margin-bottom:1.2rem;
-}
-.subscribe-hero-sub {
-  font-size:1.05rem; color:var(--text-sec);
-  max-width:480px; margin:0 auto 2.5rem; line-height:1.85;
-  font-weight:300;
-}
-.subscribe-hero .cta-note { font-size:0.75rem; color:var(--text-muted); }
-
-/* ========== SUBSCRIBE ========== */
-.subscribe-section {
-  background:var(--bg-warm); padding:3rem 1.5rem;
-  border-top:1px solid var(--border); border-bottom:1px solid var(--border);
-}
-.subscribe-inner {
-  max-width:560px; margin:0 auto; text-align:center;
-}
-.subscribe-inner h2 {
-  font-family:var(--font-display); font-size:1.3rem; font-weight:700;
-  color:var(--black); margin-bottom:0.4rem;
-}
-.subscribe-inner > p {
-  font-size:0.88rem; color:var(--text-sec); margin-bottom:1.5rem;
-}
-#sub-email:focus { border-color:var(--accent); box-shadow:0 0 0 3px var(--accent-light); }
-
-/* ========== SECTIONS ========== */
-.section { padding:4.5rem 1.5rem; }
-.section-inner { max-width:var(--max-w-wide); margin:0 auto; }
-.section-hdr { margin-bottom:2.5rem; display:flex; align-items:baseline; justify-content:space-between; gap:1rem; }
-.section-hdr h2 {
-  font-family:var(--font-display); font-size:1.3rem; font-weight:700;
-  color:var(--black);
-}
-.section-hdr .view-all {
-  font-family:var(--font); font-size:0.72rem; font-weight:500;
-  color:var(--link); cursor:pointer; white-space:nowrap;
-  letter-spacing:0.05em; text-transform:uppercase;
-}
-.section-hdr .view-all:hover { text-decoration:underline; }
-
-/* ========== FEATURES ========== */
-.features-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.25rem; }
-@media(max-width:768px){ .features-grid{grid-template-columns:1fr;} }
-.feature-card {
-  padding:1.35rem; border:1px solid var(--border); border-radius:0;
-  transition:all 0.2s var(--ease);
-}
-.feature-card:hover { border-color:var(--border-dark); box-shadow:0 2px 12px rgba(0,0,0,0.04); }
-.feature-icon {
-  width:34px; height:34px; border-radius:0; background:var(--warm-light);
-  display:flex; align-items:center; justify-content:center;
-  margin-bottom:0.75rem; font-size:1rem;
-}
-.feature-card h3 {
-  font-family:var(--font-display); font-size:0.9rem; font-weight:700;
-  color:var(--black); margin-bottom:0.3rem;
-}
-.feature-card p { font-size:0.8rem; color:var(--text-sec); line-height:1.6; }
-
-/* ========== POST CARDS ========== */
-.posts-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.25rem; }
-@media(max-width:900px){ .posts-grid{grid-template-columns:repeat(2,1fr);} }
-@media(max-width:600px){ .posts-grid{grid-template-columns:1fr;} }
-.post-card {
-  border:1px solid var(--border); border-radius:0; overflow:hidden;
-  transition:all 0.2s var(--ease); display:flex; flex-direction:column;
-}
-.post-card:hover { border-color:var(--border-dark); box-shadow:0 4px 20px rgba(0,0,0,0.06); transform:translateY(-2px); }
-.post-card-img {
-  height:150px; background:var(--bg-cool);
-  display:flex; align-items:center; justify-content:center; overflow:hidden;
-}
-.post-card-img img { width:100%; height:100%; object-fit:cover; }
-.post-card-img .placeholder-icon {
-  font-family:var(--font-display); font-size:1.6rem; font-weight:700;
-  color:var(--border-dark); opacity:0.4;
-}
-.post-card-body { padding:1rem 1.15rem 1.15rem; flex:1; display:flex; flex-direction:column; }
-.post-card-tag {
-  font-family:var(--font-display); font-size:0.62rem; font-weight:600;
-  text-transform:uppercase; letter-spacing:0.08em;
-  color:var(--text-muted); margin-bottom:0.35rem;
-}
-.post-card-body h3 {
-  font-family:var(--font-display); font-size:0.92rem; font-weight:700;
-  color:var(--black); line-height:1.3; margin-bottom:0.35rem;
-}
-.post-card-body p {
-  font-size:0.78rem; color:var(--text-sec); line-height:1.55;
-  margin-bottom:0.65rem; flex:1;
-}
-.post-card-meta {
-  font-size:0.68rem; color:var(--text-muted);
-  display:flex; justify-content:space-between; align-items:center;
-  padding-top:0.55rem; border-top:1px solid var(--border);
-}
-.post-card-meta .read-link {
-  font-family:var(--font-display); font-weight:600; color:var(--link); font-size:0.72rem;
-}
-
-/* ========== STORY SECTION ========== */
-.story-section { border-top:1px solid var(--border); border-bottom:1px solid var(--border); background:var(--bg-cool); }
-.story-box {
-  max-width:960px; margin:0 auto;
-  padding:2rem 2.5rem; border-radius:0;
-  background:var(--white); border:1px solid var(--border);
-}
-.story-box h2 { font-family:var(--font-display); font-size:1.15rem; font-weight:700; color:var(--black); margin-bottom:0.4rem; }
-.story-box > p { font-size:0.88rem; color:var(--text-sec); line-height:1.65; margin-bottom:1rem; max-width:680px; }
-.story-cta {
-  font-family:var(--font-display); font-size:0.82rem; font-weight:600;
-  color:var(--link); cursor:pointer;
-}
-.story-cta:hover { text-decoration:underline; }
-
-/* ========== CTA ========== */
-.cta-section { padding:4.5rem 1.5rem; }
-.cta-box {
-  max-width:960px; margin:0 auto;
-  background:var(--accent); border-radius:0;
-  padding:4rem 2rem; text-align:center; color:var(--white);
-}
-.cta-box h2 {
-  font-family:var(--font-display); font-size:1.6rem; font-weight:600;
-  margin-bottom:0.6rem; font-style:italic;
-}
-.cta-box p {
-  font-size:0.88rem; color:rgba(255,255,255,0.7); max-width:420px;
-  margin:0 auto 1.8rem; line-height:1.7; font-weight:300;
-}
-.btn-sub-light {
-  font-family:var(--font); font-size:0.72rem; font-weight:500;
-  letter-spacing:0.08em; text-transform:uppercase;
-  color:var(--black); background:var(--white);
-  padding:0.65rem 2rem; border-radius:0; transition:all 0.2s;
-  display:inline-block;
-}
-.btn-sub-light:hover { background:#e8e8e6; }
-
-/* ========== ARCHIVE ========== */
-.arch-header { padding:3rem 1.5rem 1.5rem; max-width:var(--max-w-wide); margin:0 auto; }
-.arch-header h1 {
-  font-family:var(--font-display); font-size:1.6rem; font-weight:700;
-  color:var(--black); margin-bottom:0.2rem;
-}
-.arch-header p { color:var(--text-sec); font-size:0.88rem; }
-.arch-filters {
-  padding:0 1.5rem; position:sticky; top:var(--nav-h);
-  background:var(--white); z-index:100; border-bottom:1px solid var(--border);
-}
-.arch-chips {
-  max-width:var(--max-w-wide); margin:0 auto;
-  display:flex; gap:0.3rem; flex-wrap:wrap; padding:0.6rem 0;
-}
-.ac {
-  font-family:var(--font-display); font-size:0.68rem; font-weight:600;
-  color:var(--text-sec); padding:5px 12px; cursor:pointer;
-  transition:all 0.15s; border-radius:20px;
-  border:1px solid var(--border); background:var(--white);
-  text-transform:uppercase; letter-spacing:0.04em;
-}
-.ac:hover { color:var(--black); border-color:var(--border-dark); }
-.ac.act { background:var(--black); color:var(--white); border-color:var(--black); }
-.arch-results { padding:1rem 1.5rem 4rem; }
-.arch-grid { max-width:var(--max-w-wide); margin:0 auto; display:flex; flex-direction:column; }
-.acard {
-  padding:1rem 0; display:flex; gap:1rem; align-items:flex-start;
-  border-bottom:1px solid var(--border); cursor:pointer; transition:all 0.15s;
-}
-.acard:hover { background:var(--bg-cool); margin:0 -1rem; padding-left:1rem; padding-right:1rem; border-radius:0; }
-.acard-num {
-  font-family:var(--font-display); font-size:0.72rem; font-weight:700;
-  color:var(--text-muted); min-width:35px; padding-top:2px;
-}
-.acard-c h3 { font-family:var(--font-display); font-size:0.88rem; font-weight:700; color:var(--black); line-height:1.3; margin-bottom:0.1rem; }
-.acard-c .am { font-size:0.7rem; color:var(--text-muted); }
-.acard-c .am span { color:var(--link); font-weight:500; }
-.acard-c p { font-size:0.8rem; color:var(--text-sec); line-height:1.5; margin-top:0.2rem; }
-
-/* ========== ADVERTISE ========== */
-.adv-header { padding:3rem 1.5rem 1.5rem; max-width:var(--max-w-wide); margin:0 auto; }
-.adv-header h1 { font-family:var(--font-display); font-size:1.6rem; font-weight:700; color:var(--black); margin-bottom:0.4rem; }
-.adv-header p { color:var(--text-sec); font-size:0.92rem; max-width:520px; line-height:1.65; }
-.adv-content { padding:1rem 1.5rem 4rem; }
-.adv-grid { max-width:var(--max-w-wide); margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:3rem; }
-@media(max-width:768px){ .adv-grid{grid-template-columns:1fr;} }
-.adv-bens h2 { font-family:var(--font-display); font-size:1.05rem; font-weight:700; color:var(--black); margin-bottom:1.25rem; }
-.adv-item { display:flex; gap:0.75rem; margin-bottom:1.25rem; align-items:flex-start; }
-.adv-num {
-  font-family:var(--font-display); font-size:0.68rem; font-weight:700;
-  width:24px; height:24px; border-radius:0; background:var(--cta-light);
-  color:var(--cta); display:flex; align-items:center; justify-content:center;
-  flex-shrink:0; margin-top:2px;
-}
-.adv-item h3 { font-family:var(--font-display); font-size:0.85rem; font-weight:700; color:var(--black); margin-bottom:2px; }
-.adv-item p { font-size:0.8rem; color:var(--text-sec); line-height:1.55; }
-.adv-form { background:var(--bg-cool); border-radius:0; padding:1.75rem; border:1px solid var(--border); }
-.adv-form h2 { font-family:var(--font-display); font-size:1rem; font-weight:700; color:var(--black); margin-bottom:1rem; }
-.fg { margin-bottom:0.75rem; }
-.fg label { display:block; font-family:var(--font-display); font-size:0.68rem; font-weight:600; color:var(--text-sec); margin-bottom:4px; }
-.fg input,.fg select,.fg textarea {
-  width:100%; padding:0.55rem 0.75rem; font-family:var(--font); font-size:0.85rem;
-  color:var(--text); border:1.5px solid var(--border-dark); background:var(--white);
-  outline:none; transition:border-color 0.15s; border-radius:0;
-}
-.fg input:focus,.fg select:focus,.fg textarea:focus { border-color:var(--accent); }
-.fg textarea { resize:vertical; min-height:80px; }
-.form-btn {
-  width:100%; padding:0.75rem; font-family:var(--font); font-size:0.72rem; font-weight:500;
-  letter-spacing:0.08em; text-transform:uppercase;
-  color:var(--white); background:var(--black); border-radius:0;
-  transition:background 0.2s; margin-top:0.4rem;
-}
-.form-btn:hover { background:var(--cta-dark); }
-
-/* ========== ABOUT ========== */
-.about-header { padding:3rem 1.5rem 1.5rem; max-width:var(--max-w-wide); margin:0 auto; }
-.about-header h1 { font-family:var(--font-display); font-size:1.6rem; font-weight:700; color:var(--black); margin-bottom:0.4rem; }
-.about-header p { color:var(--text-sec); font-size:0.92rem; max-width:580px; line-height:1.65; }
-
-.about-section { padding:4rem 1.5rem; }
-.about-section-inner { max-width:var(--max-w-wide); margin:0 auto; }
-.about-section-inner h2 {
-  font-family:var(--font-display); font-size:1.2rem; font-weight:700;
-  color:var(--black); margin-bottom:1.5rem;
-}
-
-.mission-box {
-  max-width:960px; margin:0 auto;
-  padding:2rem 2.5rem; border-radius:0;
-  background:var(--bg-cool); border:1px solid var(--border);
-}
-.mission-box p {
-  font-size:0.95rem; color:var(--text-sec); line-height:1.7;
-  margin-bottom:1rem;
-}
-.mission-box p:last-child { margin-bottom:0; }
-
-/* ========== PILLARS ========== */
-.pillars-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.25rem; }
-@media(max-width:768px){ .pillars-grid{grid-template-columns:1fr;} }
-.pillar-card {
-  padding:1.5rem; border:1px solid var(--border); border-radius:0;
-  background:var(--white);
-  transition:all 0.2s var(--ease);
-}
-.pillar-card:hover { border-color:var(--border-dark); box-shadow:0 2px 12px rgba(0,0,0,0.04); }
-.pillar-num {
-  font-family:var(--font-display); font-size:0.68rem; font-weight:700;
-  width:26px; height:26px; border-radius:0; background:var(--cta-light);
-  color:var(--cta); display:flex; align-items:center; justify-content:center;
-  margin-bottom:0.85rem;
-}
-.pillar-card h3 {
-  font-family:var(--font-display); font-size:0.95rem; font-weight:700;
-  color:var(--black); margin-bottom:0.4rem;
-}
-.pillar-card p { font-size:0.83rem; color:var(--text-sec); line-height:1.6; }
-
-/* ========== TEAM ========== */
-.team-section { background:var(--bg-cool); border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
-.team-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1.5rem; max-width:760px; margin:0 auto; }
-@media(max-width:700px){ .team-grid{grid-template-columns:1fr;} }
-.team-card {
-  background:var(--white);
-  border:1px solid var(--border); border-radius:0;
-  padding:1.75rem 1.5rem; text-align:center;
-  transition:all 0.2s var(--ease);
-  display:flex; flex-direction:column; align-items:center;
-}
-.team-card:hover { border-color:var(--border-dark); box-shadow:0 4px 20px rgba(0,0,0,0.06); transform:translateY(-2px); }
-.team-photo {
-  width:110px; height:110px; border-radius:50%;
-  background:var(--bg-warm); border:1px solid var(--border);
-  overflow:hidden; margin-bottom:1rem;
-  display:flex; align-items:center; justify-content:center;
-  flex-shrink:0;
-}
-.team-photo img { width:100%; height:100%; object-fit:cover; }
-.team-photo-placeholder {
-  font-family:var(--font-display); font-size:1.6rem; font-weight:700;
-  color:var(--border-dark); opacity:0.5;
-}
-.team-card h3 {
-  font-family:var(--font-display); font-size:1rem; font-weight:700;
-  color:var(--black); margin-bottom:0.15rem;
-}
-.team-role {
-  font-family:var(--font-display); font-size:0.7rem; font-weight:600;
-  text-transform:uppercase; letter-spacing:0.08em;
-  color:var(--accent); margin-bottom:0.85rem;
-}
-.team-bio {
-  font-size:0.82rem; color:var(--text-sec); line-height:1.6;
-}
-.team-social {
-  display:inline-flex; align-items:center; gap:6px;
-  margin-top:0.85rem; padding:0.4rem 0.75rem;
-  font-family:var(--font-display); font-size:0.72rem; font-weight:600;
-  color:var(--text-sec); background:var(--bg-cool);
-  border:1px solid var(--border); border-radius:0;
-  transition:all 0.15s;
-}
-.team-social:hover { color:var(--accent); border-color:var(--accent); background:var(--accent-light); }
-.team-social svg { flex-shrink:0; }
-
-/* ========== FOOTER ========== */
-.footer { border-top:1px solid var(--border); padding:2rem 1.5rem; }
-.footer-inner {
-  max-width:var(--max-w-wide); margin:0 auto;
-  display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;
-}
-.footer-brand { display:flex; align-items:center; gap:8px; }
-.footer-brand span { font-family:var(--font-display); font-size:0.85rem; color:var(--text-sec); font-weight:600; }
-.footer-links { display:flex; gap:1.5rem; }
-.footer-links a { font-size:0.75rem; color:var(--text-muted); transition:color 0.15s; font-weight:500; cursor:pointer; }
-.footer-links a:hover { color:var(--black); }
-.footer-copy {
-  width:100%; text-align:center; font-size:0.65rem; color:var(--text-muted);
-  margin-top:1rem; padding-top:1rem; border-top:1px solid var(--border);
-}
-
-/* Empty states */
-.empty-state {
-  text-align:center; padding:3rem 2rem;
-  display:flex; flex-direction:column; align-items:center; gap:0.5rem;
-}
-.empty-state h3 { font-family:var(--font-display); font-size:1.05rem; font-weight:700; color:var(--text); }
-.empty-state p { font-size:0.85rem; color:var(--text-muted); max-width:380px; line-height:1.6; }
-.empty-state a { color:var(--link); font-weight:600; cursor:pointer; }
-
-/* ========== WHAT'S INSIDE ========== */
-.inside-header {
-  padding:3.5rem 1.5rem 0;
-  max-width:var(--max-w-wide); margin:0 auto;
-}
-.inside-header h1 {
-  font-family:var(--font-display); font-size:1.6rem; font-weight:700;
-  color:var(--black); margin-bottom:0.4rem;
-}
-.inside-layout {
-  max-width:var(--max-w-wide); margin:0 auto;
-  padding:2.5rem 1.5rem 4rem;
-  display:grid; grid-template-columns:1fr 1.2fr; gap:3.5rem;
-  align-items:start;
-}
-@media(max-width:768px){ .inside-layout{grid-template-columns:1fr; gap:2rem;} }
-.inside-intro p {
-  font-size:0.95rem; color:var(--text-sec); line-height:1.75; margin-bottom:1.25rem;
-}
-.inside-intro p:last-of-type { margin-bottom:2rem; }
-.inside-intro .inside-stat {
-  font-family:var(--font-display); font-size:0.78rem; font-weight:600;
-  color:var(--text-muted); letter-spacing:0.03em;
-  padding-top:1.25rem; border-top:1px solid var(--border);
-}
-.inside-grid {
-  display:grid; grid-template-columns:1fr 1fr; gap:1rem;
-}
-@media(max-width:480px){ .inside-grid{grid-template-columns:1fr;} }
-.inside-card {
-  padding:1.25rem 1.35rem;
-  border:1px solid var(--border);
-  background:var(--white);
-  transition:all 0.2s var(--ease);
-}
-.inside-card:hover {
-  border-color:var(--border-dark);
-  box-shadow:0 2px 12px rgba(0,0,0,0.04);
-}
-.inside-card-num {
-  font-family:var(--font-display); font-size:0.68rem; font-weight:700;
-  color:var(--text-muted); margin-bottom:0.6rem;
-  letter-spacing:0.04em;
-}
-.inside-card h3 {
-  font-family:var(--font-display); font-size:0.95rem; font-weight:700;
-  color:var(--black); margin-bottom:0.35rem;
-}
-.inside-card p {
-  font-size:0.8rem; color:var(--text-sec); line-height:1.6;
-}
-</style>
+<link rel="stylesheet" href="/assets/shared.css">
 </head>
 <body>
 
 <!-- NAV -->
 <nav class="nav">
   <div class="nav-inner">
-    <a class="nav-logo" onclick="go('home')">
+    <a class="nav-logo" href="/">
       <img src="/logo.png" alt="the consult." style="height:58px;width:auto;">
     </a>
     <div class="nav-center" id="nc">
-      <a class="nav-link" onclick="go('home')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg> Home</a>
-      <a class="nav-link" onclick="go('inside')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg> What's Inside</a>
-      <a class="nav-link" onclick="go('archive')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg> Archive</a>
-      <a class="nav-link" onclick="go('advertise')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg> Advertise</a>
-      <a class="nav-link" onclick="go('about')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg> About</a>
+      <a class="nav-link" href="/"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg> Home</a>
+      <a class="nav-link" href="/inside"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg> What's Inside</a>
+      <a class="nav-link" href="/archive"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg> Archive</a>
+      <a class="nav-link" href="/advertise"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg> Advertise</a>
+      <a class="nav-link" href="/about"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg> About</a>
     </div>
     <div class="nav-right" id="nr">
-      <a class="btn-sub" onclick="go('home','subscribe')">Subscribe For Free</a>
+      <a class="btn-sub" href="/#subscribe">Subscribe For Free</a>
     </div>
     <button class="nav-toggle" onclick="toggleM()" aria-label="Menu"><span></span><span></span><span></span></button>
   </div>
 </nav>
-
-<!-- HEADLINE ROTATOR -->
 <div class="headline-bar">
   <div class="headline-bar-inner" id="headlineRotator"></div>
 </div>
 
-<!-- ===== HOME ===== -->
-<div class="page active" id="page-home">
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <h1>Where healthcare comes to catch up.</h1>
+  </div>
+</section>
 
-  <section class="hero">
-    <div class="hero-inner">
-      <h1>Where healthcare comes to catch up.</h1>
-    </div>
-  </section>
-
-  <section class="subscribe-hero" id="subscribe">
-    <div class="subscribe-hero-inner">
-      <div class="subscribe-hero-label">Every Sunday · 5 min read</div>
+<!-- SUBSCRIBE + WHAT'S INSIDE -->
+<section class="subscribe-hero" id="subscribe">
+  <div class="subscribe-hero-inner">
+    <div class="subscribe-left">
+      <div class="subscribe-hero-label">Every Sunday &middot; 5 min read</div>
       <p class="subscribe-hero-sub">A growing community of healthcare professionals who want to stay ahead. Every Sunday, we break down the research, AI tools, and clinical news that actually matter, in 5 minutes.</p>
-      <form id="subscribeForm" style="display:flex;gap:0.5rem;flex-wrap:wrap;align-items:center;justify-content:center;max-width:460px;margin:0 auto;">
+      <form id="subscribeForm" style="display:flex;gap:0.5rem;flex-wrap:wrap;align-items:center;max-width:460px;">
         <label for="sub-email" class="sr-only">Email address</label>
         <input type="email" id="sub-email" placeholder="Enter your email" required aria-label="Email address"
-          style="flex:1;min-width:220px;padding:0.75rem 1rem;border:1px solid var(--border-dark);border-radius:0;
+          style="flex:1;min-width:200px;padding:0.75rem 1rem;border:1px solid var(--border-dark);border-radius:0;
           font-family:var(--font);font-size:0.85rem;color:var(--black);background:var(--white);
           outline:none;transition:border-color 0.2s;">
         <button type="submit" id="sub-btn"
@@ -633,271 +75,78 @@ button { cursor:pointer; border:none; background:none; font-family:inherit; }
       <p id="sub-msg" style="font-size:0.75rem;color:var(--text-muted);margin-top:0.75rem;display:none;"></p>
       <span class="cta-note" style="display:block;margin-top:1rem;">Free. Every Sunday. Join healthcare professionals everywhere.</span>
     </div>
-  </section>
-
-  <!-- Recent Issues -->
-  <section class="section" style="background:var(--bg-cool);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
-    <div class="section-inner">
-      <div class="section-hdr anim">
-        <h2>Recent issues</h2>
-        <a class="view-all" onclick="go('archive')">View all →</a>
+    <div class="subscribe-right">
+      <h3>What you get every Sunday</h3>
+      <div class="subscribe-right-grid">
+        <div class="subscribe-right-card">
+          <div class="card-num">01</div>
+          <h4>The Opening</h4>
+          <p>A warm, signed note to start your Sunday.</p>
+        </div>
+        <div class="subscribe-right-card">
+          <div class="card-num">02</div>
+          <h4>From the Field</h4>
+          <p>Reader-submitted stories from the frontlines.</p>
+        </div>
+        <div class="subscribe-right-card">
+          <div class="card-num">03</div>
+          <h4>The Consult</h4>
+          <p>A signed weekly column from an attending.</p>
+        </div>
+        <div class="subscribe-right-card">
+          <div class="card-num">04</div>
+          <h4>Vitals</h4>
+          <p>Four news items worth knowing this week.</p>
+        </div>
+        <div class="subscribe-right-card">
+          <div class="card-num">05</div>
+          <h4>Rounds</h4>
+          <p>One person shaping where healthcare is headed.</p>
+        </div>
+        <div class="subscribe-right-card">
+          <div class="card-num">06</div>
+          <h4>Differential</h4>
+          <p>A curious question in medicine, answered.</p>
+        </div>
       </div>
-      <div class="posts-grid" id="issueGrid"></div>
-      <div class="empty-state" id="issueEmpty">
-        <h3>Issue #01 is on the way</h3>
-        <p>The first edition of The Consult is in production. Subscribe above to be the first to read it.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- From the Field -->
-  <section class="section story-section">
-    <div class="section-inner">
-      <div class="story-box anim">
-        <h2>From the field</h2>
-        <p>Seen something interesting on shift? Have a take on something we covered? Share a clinical observation, a case that surprised you, or a story from the frontlines — and we may feature it in a future issue.</p>
-        <a class="story-cta" onclick="go('submit')">Share your story →</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA -->
-  <section class="cta-section">
-    <div class="cta-box anim">
-      <h2>Don't miss the next issue.</h2>
-      <p>Free. Every Sunday morning. The healthcare news you'll actually finish reading.</p>
-      <button class="btn-sub-light" onclick="go('home','subscribe')">Subscribe</button>
-    </div>
-  </section>
-</div>
-
-<!-- ===== WHAT'S INSIDE ===== -->
-<div class="page" id="page-inside">
-  <div class="inside-header">
-    <h1>What you're in for</h1>
-  </div>
-  <div class="inside-layout">
-    <div class="inside-intro anim">
-      <p>Every Sunday morning, The Consult delivers five minutes of the research, the tools, the people, and the stories that remind you why this work matters.</p>
-      <p>Human-curated, physician-reviewed. Every issue delivers immediate signal alongside the slower ideas that change how you think about the field, not just what you click.</p>
-      <p>We write for clinicians. We let the public listen in. Six sections, the same structure every week, because your time deserves consistency.</p>
-      <div class="inside-stat">Free. Every Sunday. Five minutes. Join the community.</div>
-      <button class="btn-sub" style="margin-top:1.5rem;" onclick="go('home','subscribe')">Subscribe For Free</button>
-    </div>
-    <div class="inside-grid">
-
-      <div class="inside-card anim">
-        <div class="inside-card-num">01</div>
-        <h3>The Opening</h3>
-        <p>A warm, signed note to start your Sunday. Sets the mood for the week ahead.</p>
-      </div>
-
-      <div class="inside-card anim">
-        <div class="inside-card-num">02</div>
-        <h3>From the Field</h3>
-        <p>Three reader-submitted stories from the frontlines. De-identified, consented, rotated across roles.</p>
-      </div>
-
-      <div class="inside-card anim">
-        <div class="inside-card-num">03</div>
-        <h3>The Consult</h3>
-        <p>A signed weekly column. An attending's honest reflection on the craft of medicine.</p>
-      </div>
-
-      <div class="inside-card anim">
-        <div class="inside-card-num">04</div>
-        <h3>Vitals</h3>
-        <p>Four news items worth knowing. Research, AI, clinical, and policy, each with a one-line editorial take.</p>
-      </div>
-
-      <div class="inside-card anim">
-        <div class="inside-card-num">05</div>
-        <h3>Rounds</h3>
-        <p>One person worth knowing. A real clinician, researcher, or builder shaping where healthcare is headed.</p>
-      </div>
-
-      <div class="inside-card anim">
-        <div class="inside-card-num">06</div>
-        <h3>Differential</h3>
-        <p>A curious question in medicine answered warmly and accurately. Smart humor, never at a patient's expense.</p>
-      </div>
-
     </div>
   </div>
+</section>
 
-  <!-- CTA -->
-  <section class="cta-section">
-    <div class="cta-box anim">
-      <h2>See for yourself.</h2>
-      <p>Free. Every Sunday morning. Six sections, five minutes, one community.</p>
-      <button class="btn-sub-light" onclick="go('home','subscribe')">Subscribe</button>
+<!-- RECENT ISSUES -->
+<section class="section" style="background:var(--bg-cool);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+  <div class="section-inner">
+    <div class="section-hdr anim">
+      <h2>Recent issues</h2>
+      <a class="view-all" href="/archive">View all &rarr;</a>
     </div>
-  </section>
-</div>
-
-<!-- ===== ARCHIVE ===== -->
-<div class="page" id="page-archive">
-  <div class="arch-header">
-    <h1>Archive</h1>
-    <p>Every issue of The Consult.</p>
+    <div class="posts-grid" id="issueGrid"></div>
+    <div class="empty-state" id="issueEmpty">
+      <h3>Issue #01 is on the way</h3>
+      <p>The first edition of The Consult is in production. Subscribe above to be the first to read it.</p>
+    </div>
   </div>
-  <section class="arch-filters"><div class="arch-chips" id="achips">
-    <button class="ac act" data-f="all">All</button>
-    <button class="ac" data-f="horizon">Horizon</button>
-    <button class="ac" data-f="clinical">Clinical</button>
-    <button class="ac" data-f="ai">AI</button>
-    <button class="ac" data-f="research">Research</button>
-    <button class="ac" data-f="field">Field</button>
-  </div></section>
-  <section class="arch-results"><div style="max-width:var(--max-w-wide);margin:0 auto;">
-    <div class="arch-grid" id="agrid"></div>
-    <div class="empty-state" id="filterEmpty" style="display:none;">
-      <h3>No issues in this category yet</h3>
-      <p>Try a different filter or <a onclick="document.querySelector('.ac[data-f=all]').click()">view all issues</a>.</p>
-    </div>
-    <div class="empty-state" id="archiveEmpty">
-      <h3>No issues yet</h3>
-      <p>Issue #01 is in production. <a onclick="go('home','subscribe')">Subscribe</a> to get it when it drops.</p>
-    </div>
-  </div></section>
-</div>
+</section>
 
-<!-- ===== ADVERTISE ===== -->
-<div class="page" id="page-advertise">
-  <div class="adv-header"><h1>Reach healthcare professionals who read</h1><p>The Consult delivers a curated, engaged audience of healthcare professionals. Your message lands in the inbox they open Sunday morning.</p></div>
-  <section class="adv-content"><div class="adv-grid" style="max-width:var(--max-w-wide);margin:0 auto;">
-    <div class="adv-bens">
-      <h2>Why advertise with us</h2>
-      <div class="adv-item anim"><div class="adv-num">01</div><div><h3>Healthcare-Focused Audience</h3><p>Reach doctors, nurses, pharmacists, and allied health professionals. Every subscriber works in healthcare.</p></div></div>
-      <div class="adv-item anim"><div class="adv-num">02</div><div><h3>High-Trust Context</h3><p>Your brand appears alongside curated research — not clickbait. Readers engage because they trust the source.</p></div></div>
-      <div class="adv-item anim"><div class="adv-num">03</div><div><h3>Transparent Metrics</h3><p>Full reporting on opens, clicks, and engagement. Real numbers, always.</p></div></div>
-      <div class="adv-item anim"><div class="adv-num">04</div><div><h3>Flexible Formats</h3><p>Sponsored sections, dedicated sends, or native placements. We match your campaign goals.</p></div></div>
+<!-- FROM THE FIELD -->
+<section class="section story-section">
+  <div class="section-inner">
+    <div class="story-box anim">
+      <h2>From the field</h2>
+      <p>Seen something interesting on shift? Have a take on something we covered? Share a clinical observation, a case that surprised you, or a story from the frontlines — and we may feature it in a future issue.</p>
+      <a class="story-cta" href="/submit">Share your story &rarr;</a>
     </div>
-    <div class="adv-form anim">
-      <h2>Get in touch</h2>
-      <form id="advForm">
-        <div class="fg"><label for="adv-name">Full Name</label><input type="text" id="adv-name" placeholder="Jane Smith" required></div>
-        <div class="fg"><label for="adv-email">Work Email</label><input type="email" id="adv-email" placeholder="jane@company.com" required></div>
-        <div class="fg"><label for="adv-company">Company</label><input type="text" id="adv-company" placeholder="Acme Pharma" required></div>
-        <div class="fg"><label for="adv-budget">Budget</label><select id="adv-budget"><option value="">Select range</option><option>Under $5K</option><option>$5K – $15K</option><option>$15K – $50K</option><option>$50K+</option></select></div>
-        <div class="fg"><label for="adv-message">Details</label><textarea id="adv-message" placeholder="What are you promoting? Tell us about your campaign."></textarea></div>
-        <button type="submit" class="form-btn">Send Inquiry →</button>
-      </form>
-    </div>
-  </div></section>
-</div>
-
-<!-- ===== SUBMIT STORY ===== -->
-<div class="page" id="page-submit">
-  <div class="adv-header">
-    <h1>Share your story</h1>
-    <p>Seen something interesting on shift? A case that surprised you? A take on something we covered? Tell us — we may feature it in a future issue.</p>
   </div>
-  <section class="adv-content"><div style="max-width:560px;margin:0 auto;">
-    <div class="adv-form anim">
-      <h2>Tell us what happened</h2>
-      <form id="storyForm">
-        <div class="fg"><label for="story-name">Your Name</label><input type="text" id="story-name" placeholder="Jane Smith" required></div>
-        <div class="fg"><label for="story-email">Email</label><input type="email" id="story-email" placeholder="jane@hospital.com" required></div>
-        <div class="fg"><label for="story-role">Your Role</label><input type="text" id="story-role" placeholder="RN, MD, PA, Pharmacist, etc."></div>
-        <div class="fg"><label for="story-message">Your Story</label><textarea id="story-message" placeholder="What happened? What did you observe? What's your take?" style="min-height:140px;" required></textarea></div>
-        <div class="fg" style="display:flex;align-items:center;gap:8px;">
-          <input type="checkbox" id="story-anon" style="width:auto;">
-          <label for="story-anon" style="margin:0;text-transform:none;font-family:var(--font);font-size:0.8rem;color:var(--text-sec);">Keep my name anonymous if published</label>
-        </div>
-        <button type="submit" class="form-btn">Submit Story →</button>
-      </form>
-    </div>
-  </div></section>
-</div>
+</section>
 
-<!-- ===== ABOUT ===== -->
-<div class="page" id="page-about">
-  <div class="about-header">
-    <h1>About</h1>
-    <p>Building a community for the people who keep healthcare running.</p>
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-box anim">
+    <h2>Don't miss the next issue.</h2>
+    <p>Free. Every Sunday morning. The healthcare news you'll actually finish reading.</p>
+    <a class="btn-sub-light" href="/#subscribe">Subscribe</a>
   </div>
-
-  <section class="about-section">
-    <div class="about-section-inner">
-      <div class="mission-box anim">
-        <p>The Consult started with a simple observation: healthcare is full of people doing extraordinary work in isolation. Physicians, nurses, pharmacists, and trainees are all living the same moments in different hospitals, carrying the same questions, and rarely getting a chance to trade notes.</p>
-        <p>We're building the place where that trade happens. A Sunday briefing to keep the field connected to where it's going, and a space for the people inside it to share what they're seeing, who they're learning from, and what's actually worth paying attention to.</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="about-section">
-    <div class="about-section-inner">
-      <div class="section-hdr anim" style="margin-bottom:1.5rem;"><h2>What we're building</h2></div>
-      <div class="pillars-grid">
-
-        <div class="pillar-card anim">
-          <div class="pillar-num">01</div>
-          <h3>A weekly briefing</h3>
-          <p>Every Sunday, five minutes of the research, AI, and clinical news that actually matters. Curated by the team and reviewed by a practicing physician before it ships.</p>
-        </div>
-
-        <div class="pillar-card anim">
-          <div class="pillar-num">02</div>
-          <h3>Stories from the field</h3>
-          <p>The cases, the saves, the moments that don't make the journals. A space for clinicians to share what they're seeing on shift, anonymously or on the record.</p>
-        </div>
-
-        <div class="pillar-card anim">
-          <div class="pillar-num">03</div>
-          <h3>People worth knowing</h3>
-          <p>The researchers, clinicians, and builders shaping where healthcare is headed. We highlight the work, and the people behind it, so the field gets to see its own.</p>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <section class="about-section team-section">
-    <div class="about-section-inner">
-      <h2 class="anim">The team</h2>
-      <div class="team-grid">
-
-        <div class="team-card anim">
-          <div class="team-photo">
-            <img src="/ray.jpg" alt="Ray M. Wade">
-          </div>
-          <h3>Ray M. Wade</h3>
-          <div class="team-role">Co-Founder</div>
-          <p class="team-bio">Ray is an honors pre-med student at Augusta University. His introduction to medicine came through caregiving, an experience that revealed the discipline to be as much about human connection as clinical science. At The Consult, he is building the kind of community he believes healthcare needs: one where professionals stay current, think critically, and engage with the field beyond the walls of their own institution. He spends his time outside the classroom training, backpacking, and in the company of his dog Cookie.</p>
-          <a class="team-social" href="https://www.linkedin.com/in/ray-wade-473125248/" target="_blank" rel="noopener">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.063 2.063 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-            LinkedIn
-          </a>
-        </div>
-
-        <div class="team-card anim">
-          <div class="team-photo">
-            <img src="/ibrahim.png" alt="Ibrahim Mohammad">
-          </div>
-          <h3>Ibrahim Mohammad</h3>
-          <div class="team-role">Co-Founder</div>
-          <p class="team-bio">Ibrahim is a student in the Medical College of Georgia's 7-year BS/MD program, where his focus sits at the intersection of technology and clinical medicine. That orientation drives his work at The Consult, a platform built on the conviction that physicians deserve signal over noise, and access to a community that reflects the seriousness of their work. Outside of coursework and research, he is on the basketball court, in the gym, or in the kitchen testing something ambitious.</p>
-          <a class="team-social" href="https://www.linkedin.com/in/ibrahim-mohammad7862/" target="_blank" rel="noopener">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.063 2.063 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-            LinkedIn
-          </a>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA -->
-  <section class="cta-section">
-    <div class="cta-box anim">
-      <h2>Join the list.</h2>
-      <p>Free. Every Sunday morning. The healthcare news you'll actually finish reading.</p>
-      <button class="btn-sub-light" onclick="go('home','subscribe')">Subscribe</button>
-    </div>
-  </section>
-</div>
+</section>
 
 <!-- FOOTER -->
 <footer class="footer">
@@ -906,83 +155,19 @@ button { cursor:pointer; border:none; background:none; font-family:inherit; }
       <img src="/logo.png" alt="the consult." style="height:42px;width:auto;">
     </div>
     <div class="footer-links">
-      <a onclick="go('home')">Home</a>
-      <a onclick="go('inside')">What's Inside</a>
-      <a onclick="go('archive')">Archive</a>
-      <a onclick="go('advertise')">Advertise</a>
-      <a onclick="go('about')">About</a>
+      <a href="/">Home</a>
+      <a href="/inside">What's Inside</a>
+      <a href="/archive">Archive</a>
+      <a href="/advertise">Advertise</a>
+      <a href="/about">About</a>
     </div>
-    <div class="footer-copy">© 2026 The Consult. All rights reserved.</div>
+    <div class="footer-copy">&copy; 2026 The Consult. All rights reserved.</div>
   </div>
 </footer>
 
 <script>
-const SITE_CONFIG = {
-  beehiivPortalUrl: 'https://read.theconsult.info',
-  contactEmail: 'advertise@theconsult.info',
-  sponsor: null,
-};
+function toggleM(){document.getElementById('nc').classList.toggle('open');document.getElementById('nr').classList.toggle('open');}
 
-function rewriteBeehiivUrl(url) {
-  if (!url) return '#';
-  return url.replace('ibrahims-newsletter-02830a.beehiiv.com', 'read.theconsult.info');
-}
-
-async function loadBeehiivPosts() {
-  try {
-    const response = await fetch('/api/posts');
-    if (!response.ok) throw new Error(`API ${response.status}`);
-    const data = await response.json();
-    const posts = (data.data || []).filter(p => p.status === 'confirmed').sort((a, b) => (b.publish_date || 0) - (a.publish_date || 0));
-    if (posts.length === 0) return;
-
-    const issueGrid = document.getElementById('issueGrid');
-    const issueEmpty = document.getElementById('issueEmpty');
-    if (issueGrid && posts.length > 0) {
-      if (issueEmpty) issueEmpty.style.display = 'none';
-      issueGrid.innerHTML = posts.slice(0, 6).map((post, i) => {
-        const date = post.publish_date ? new Date(post.publish_date * 1000).toLocaleDateString('en-US', { month:'short', day:'numeric', year:'numeric' }) : '';
-        const preview = post.preview_text || post.meta_default_description || '';
-        const readMin = Math.max(2, Math.ceil((preview.split(/\s+/).length * 4) / 200));
-        const firstTag = (post.content_tags && post.content_tags[0]) || '';
-        const url = rewriteBeehiivUrl(post.web_url);
-        const thumb = post.thumbnail_url;
-        const hasThumb = thumb && !thumb.includes('defaults/landscape');
-        return `<a href="${url}" target="_blank" rel="noopener" class="post-card anim" style="text-decoration:none;color:inherit;">
-            <div class="post-card-img">${hasThumb ? `<img src="${thumb}" alt="${post.title}" loading="lazy">` : `<span class="placeholder-icon">TC</span>`}</div>
-            <div class="post-card-body">
-              ${firstTag ? `<div class="post-card-tag">${firstTag}</div>` : ''}
-              <h3>${post.title || 'Untitled'}</h3>
-              <p>${preview.length > 100 ? preview.slice(0,100) + '...' : preview}</p>
-              <div class="post-card-meta"><span>${date}</span><span class="read-link">${readMin} min read →</span></div>
-            </div></a>`;
-      }).join('');
-    }
-
-    const archGrid = document.getElementById('agrid');
-    const archEmpty = document.getElementById('archiveEmpty');
-    if (archGrid && posts.length > 0) {
-      if (archEmpty) archEmpty.style.display = 'none';
-      archGrid.innerHTML = posts.map((post, i) => {
-        const num = String(posts.length - i).padStart(2, '0');
-        const date = post.publish_date ? new Date(post.publish_date * 1000).toLocaleDateString('en-US', { month:'short', day:'numeric', year:'numeric' }) : '';
-        const preview = post.preview_text || post.meta_default_description || '';
-        const tags = (post.content_tags || []).join(' ') || 'all';
-        const firstTag = (post.content_tags && post.content_tags[0]) || '';
-        const url = rewriteBeehiivUrl(post.web_url);
-        return `<a href="${url}" target="_blank" rel="noopener" class="acard" data-t="${tags}" style="text-decoration:none;color:inherit;">
-            <div class="acard-num">#${num}</div>
-            <div class="acard-c"><h3>${post.title || 'Untitled'}</h3>
-              <div class="am">${date}${firstTag ? ' · <span>' + firstTag + '</span>' : ''}</div>
-              <p>${preview.length > 140 ? preview.slice(0,140) + '...' : preview}</p></div></a>`;
-      }).join('');
-    }
-    initA();
-  } catch (error) { console.log('Beehiiv API not available:', error.message); }
-}
-window.addEventListener('DOMContentLoaded', () => loadBeehiivPosts());
-
-/* Headline rotator */
 const DEFAULT_HEADLINES = [
   { category:'BREAKING', text:'FDA fast-tracks novel Alzheimer\'s antibody to priority review' },
   { category:'AI', text:'Ambient scribe adoption hits 40% across major health systems' },
@@ -1009,65 +194,7 @@ function renderHeadlines(headlines) {
     slides[current].classList.add('active');
   }, 5000);
 }
-fetch('ticker.json').then(r => r.ok ? r.json() : Promise.reject()).then(data => renderHeadlines(data.headlines || DEFAULT_HEADLINES)).catch(() => renderHeadlines(DEFAULT_HEADLINES));
-
-/* Routing */
-function go(p,s){
-  document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));
-  document.getElementById('page-'+p).classList.add('active');
-  closeM();
-  if(s){setTimeout(()=>{const e=document.getElementById(s);if(e)e.scrollIntoView({behavior:'smooth'});},100);}
-  else{window.scrollTo({top:0,behavior:'smooth'});}
-  history.pushState(null,'','#'+p);
-  initA();
-}
-window.addEventListener('popstate',()=>go(location.hash.replace('#','')||'home'));
-window.addEventListener('DOMContentLoaded',()=>go(location.hash.replace('#','')||'home'));
-
-function toggleM(){document.getElementById('nc').classList.toggle('open');document.getElementById('nr').classList.toggle('open');}
-function closeM(){document.getElementById('nc').classList.remove('open');document.getElementById('nr').classList.remove('open');}
-
-function initA(){
-  const o=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('vis');});},{threshold:0.1,rootMargin:'0px 0px -30px 0px'});
-  document.querySelectorAll('.anim').forEach(el=>{el.classList.remove('vis');o.observe(el);});
-}
-initA();
-
-document.getElementById('achips').addEventListener('click',e=>{
-  if(!e.target.classList.contains('ac'))return;
-  document.querySelectorAll('.ac').forEach(c=>c.classList.remove('act'));
-  e.target.classList.add('act');
-  const f=e.target.dataset.f;
-  let visible = 0;
-  document.querySelectorAll('.acard').forEach(c=>{
-    const show = f==='all'||c.dataset.t.includes(f);
-    c.style.display = show ? 'flex' : 'none';
-    if (show) visible++;
-  });
-  const filterEmpty = document.getElementById('filterEmpty');
-  if (filterEmpty) filterEmpty.style.display = visible === 0 ? 'flex' : 'none';
-});
-
-const advForm = document.getElementById('advForm');
-if (advForm) {
-  advForm.addEventListener('submit', function(e) {
-    e.preventDefault();
-    const name = document.getElementById('adv-name').value;
-    const email = document.getElementById('adv-email').value;
-    const company = document.getElementById('adv-company').value;
-    const budget = document.getElementById('adv-budget').value;
-    const message = document.getElementById('adv-message').value;
-    const subject = encodeURIComponent('Advertiser Inquiry — The Consult');
-    const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nCompany: ${company}\nBudget: ${budget}\n\nDetails:\n${message}`);
-    window.location.href = `mailto:${SITE_CONFIG.contactEmail}?subject=${subject}&body=${body}`;
-    const b = this.querySelector('.form-btn');
-    b.textContent = "Opening email client...";
-    b.style.background = '#059669'; b.style.color = '#fff';
-    setTimeout(() => { b.textContent = 'Send Inquiry →'; b.style.background = ''; b.style.color = ''; this.reset(); }, 3000);
-  });
-}
-
-const storyForm = document.getElementById('storyForm');
+fetch('/ticker.json').then(r => r.ok ? r.json() : Promise.reject()).then(data => renderHeadlines(data.headlines || DEFAULT_HEADLINES)).catch(() => renderHeadlines(DEFAULT_HEADLINES));
 
 /* Subscribe form */
 const subForm = document.getElementById('subscribeForm');
@@ -1087,9 +214,9 @@ if (subForm) {
         body: JSON.stringify({ email: email }),
       });
       if (res.ok || res.status === 201 || res.status === 200) {
-        btn.textContent = "You're in ✓";
+        btn.textContent = "You're in \u2713";
         btn.style.background = '#059669';
-        msg.textContent = 'Check your inbox — your first issue arrives Sunday.';
+        msg.textContent = 'Check your inbox \u2014 your first issue arrives Sunday.';
         msg.style.color = 'var(--accent-dark)';
         msg.style.display = 'block';
         subForm.querySelector('input').value = '';
@@ -1097,32 +224,50 @@ if (subForm) {
         throw new Error('Subscribe failed');
       }
     } catch (err) {
-      btn.textContent = 'Subscribe For Free →';
+      btn.textContent = 'Subscribe';
       btn.style.opacity = '1';
       btn.disabled = false;
-      msg.textContent = 'Something went wrong — try again or visit read.theconsult.info';
+      msg.textContent = 'Something went wrong \u2014 try again or visit read.theconsult.info';
       msg.style.color = '#E03C31';
       msg.style.display = 'block';
     }
   });
 }
-if (storyForm) {
-  storyForm.addEventListener('submit', function(e) {
-    e.preventDefault();
-    const name = document.getElementById('story-name').value;
-    const email = document.getElementById('story-email').value;
-    const role = document.getElementById('story-role').value;
-    const message = document.getElementById('story-message').value;
-    const anon = document.getElementById('story-anon').checked ? 'Yes' : 'No';
-    const subject = encodeURIComponent('Story Submission — The Consult');
-    const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nRole: ${role}\nAnonymous: ${anon}\n\nStory:\n${message}`);
-    window.location.href = `mailto:${SITE_CONFIG.contactEmail}?subject=${subject}&body=${body}`;
-    const b = this.querySelector('.form-btn');
-    b.textContent = "Story submitted!";
-    b.style.background = '#059669'; b.style.color = '#fff';
-    setTimeout(() => { b.textContent = 'Submit Story →'; b.style.background = ''; b.style.color = ''; this.reset(); }, 3000);
-  });
+
+/* Recent issues */
+async function loadIssues() {
+  try {
+    const res = await fetch('/issues.json');
+    const issues = await res.json();
+    if (!issues.length) return;
+    const grid = document.getElementById('issueGrid');
+    const empty = document.getElementById('issueEmpty');
+    if (empty) empty.style.display = 'none';
+    grid.innerHTML = issues.slice(0, 6).map(issue => {
+      const num = String(issue.number).padStart(2, '0');
+      const date = new Date(issue.date).toLocaleDateString('en-US', { month:'short', day:'numeric', year:'numeric' });
+      return `<a href="/issues/${issue.slug}" class="post-card anim" style="text-decoration:none;color:inherit;">
+        <div class="post-card-img"><span class="placeholder-icon">TC</span></div>
+        <div class="post-card-body">
+          <div class="post-card-tag">Issue #${num}</div>
+          <h3>${issue.title}</h3>
+          <p>${issue.excerpt.length > 100 ? issue.excerpt.slice(0,100) + '...' : issue.excerpt}</p>
+          <div class="post-card-meta"><span>${date}</span><span class="read-link">5 min read \u2192</span></div>
+        </div></a>`;
+    }).join('');
+    initA();
+  } catch(e) { console.log('Issues not loaded:', e.message); }
 }
+function initA(){
+  const o=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('vis');});},{threshold:0.1,rootMargin:'0px 0px -30px 0px'});
+  document.querySelectorAll('.anim').forEach(el=>o.observe(el));
+}
+loadIssues();
+
+(function initAnimations(){
+  const o=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('vis');});},{threshold:0.1,rootMargin:'0px 0px -30px 0px'});
+  document.querySelectorAll('.anim').forEach(el=>o.observe(el));
+})();
 </script>
 </body>
 </html>

@@ -1,25 +1,44 @@
 {
   "version": 2,
+  "cleanUrls": true,
+  "trailingSlash": false,
   "builds": [
     { "src": "api/posts.js", "use": "@vercel/node" },
     { "src": "index.html", "use": "@vercel/static" },
+    { "src": "archive.html", "use": "@vercel/static" },
+    { "src": "advertise.html", "use": "@vercel/static" },
+    { "src": "about.html", "use": "@vercel/static" },
+    { "src": "inside.html", "use": "@vercel/static" },
+    { "src": "submit.html", "use": "@vercel/static" },
+    { "src": "issues/*.html", "use": "@vercel/static" },
+    { "src": "assets/**", "use": "@vercel/static" },
+    { "src": "issues.json", "use": "@vercel/static" },
+    { "src": "ticker.json", "use": "@vercel/static" },
     { "src": "logo.png", "use": "@vercel/static" },
+    { "src": "favicon.png", "use": "@vercel/static" },
     { "src": "owl-hero.png", "use": "@vercel/static" },
     { "src": "sketch-bg.png", "use": "@vercel/static" },
+    { "src": "owl-logo.png", "use": "@vercel/static" },
     { "src": "ray.jpg", "use": "@vercel/static" },
-    { "src": "ibrahim.png", "use": "@vercel/static" },
-    { "src": "ticker.json", "use": "@vercel/static" },
-    { "src": "favicon.png", "use": "@vercel/static" }
+    { "src": "ibrahim.png", "use": "@vercel/static" }
   ],
   "routes": [
     { "src": "/api/posts", "dest": "/api/posts.js" },
+    { "src": "/assets/(.*)", "dest": "/assets/$1" },
+    { "src": "/issues/(\\d+)", "dest": "/issues/$1.html" },
+    { "src": "/issues.json", "dest": "/issues.json" },
+    { "src": "/ticker.json", "dest": "/ticker.json" },
     { "src": "/favicon.png", "dest": "/favicon.png" },
     { "src": "/logo.png", "dest": "/logo.png" },
     { "src": "/owl-hero.png", "dest": "/owl-hero.png" },
     { "src": "/sketch-bg.png", "dest": "/sketch-bg.png" },
+    { "src": "/owl-logo.png", "dest": "/owl-logo.png" },
     { "src": "/ray.jpg", "dest": "/ray.jpg" },
     { "src": "/ibrahim.png", "dest": "/ibrahim.png" },
-    { "src": "/ticker.json", "dest": "/ticker.json" },
-    { "src": "/(.*)", "dest": "/index.html" }
+    { "src": "/archive", "dest": "/archive.html" },
+    { "src": "/advertise", "dest": "/advertise.html" },
+    { "src": "/about", "dest": "/about.html" },
+    { "src": "/inside", "dest": "/inside.html" },
+    { "src": "/submit", "dest": "/submit.html" }
   ]
 }

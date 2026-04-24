@@ -1,0 +1,368 @@
+/* ==========================================================================
+   issue.css — Newsletter issue page styles for "the consult."
+   Depends on design tokens from the root stylesheet (index.html :root).
+   ========================================================================== */
+
+/* ---------- Issue Header ---------- */
+
+.issue-header {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 3rem 1.5rem 2rem;
+  text-align: center;
+}
+
+.issue-header .issue-meta {
+  font-family: var(--font);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.issue-header hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin-top: 2rem;
+}
+
+/* ---------- Issue Title ---------- */
+
+.issue-title {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(2rem, 5vw, 3rem);
+  line-height: 1.2;
+  color: var(--black);
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 1.5rem 3rem;
+  text-align: center;
+}
+
+/* ---------- Issue Sections ---------- */
+
+.issue-section {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 4rem 1.5rem;
+}
+
+.issue-section + .issue-section {
+  padding-top: 0;
+}
+
+/* ---------- Section Label ---------- */
+
+.issue-section-label {
+  font-family: var(--font);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
+}
+
+/* ---------- Body Text ---------- */
+
+.issue-body {
+  max-width: var(--max-w);
+  margin: 0 auto;
+}
+
+.issue-body p {
+  font-family: var(--font);
+  font-size: 0.95rem;
+  font-weight: 400;
+  line-height: 1.8;
+  color: var(--text-sec);
+  margin-bottom: 1.5rem;
+}
+
+.issue-body p:last-child {
+  margin-bottom: 0;
+}
+
+.issue-body a {
+  color: var(--black);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+
+.issue-body a:hover {
+  color: var(--warm);
+}
+
+.issue-body blockquote {
+  border-left: 2px solid var(--border);
+  padding-left: 1.5rem;
+  margin: 2rem 0;
+  font-style: italic;
+  color: var(--text-muted);
+}
+
+.issue-body h2 {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--black);
+  margin: 2.5rem 0 1rem;
+  line-height: 1.3;
+}
+
+.issue-body h3 {
+  font-family: var(--font);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--black);
+  margin: 2rem 0 0.75rem;
+  line-height: 1.4;
+}
+
+/* ---------- Byline ---------- */
+
+.issue-byline {
+  font-family: var(--font);
+  font-size: 0.85rem;
+  font-style: italic;
+  color: var(--text-muted);
+  margin-top: 2rem;
+}
+
+/* ---------- Divider ---------- */
+
+.issue-divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  max-width: var(--max-w);
+  margin: 0 auto;
+}
+
+/* ---------- Story Card (From the Field) ---------- */
+
+.issue-story {
+  padding: 2rem 0;
+}
+
+.issue-story + .issue-story {
+  border-top: 1px solid var(--border);
+}
+
+.issue-story-role {
+  font-family: var(--font);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--warm);
+  margin-bottom: 1rem;
+}
+
+.issue-story .issue-body p {
+  font-size: 0.95rem;
+}
+
+/* ---------- Vitals (News Items) ---------- */
+
+.issue-vital {
+  padding: 2rem 0;
+}
+
+.issue-vital + .issue-vital {
+  border-top: 1px solid var(--border);
+}
+
+.issue-vital-cat {
+  display: inline-block;
+  font-family: var(--font);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  padding: 0.2rem 0.6rem;
+  margin-bottom: 0.75rem;
+}
+
+.issue-vital h3 {
+  font-family: var(--font);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--black);
+  line-height: 1.4;
+  margin-bottom: 0.5rem;
+}
+
+.issue-vital p {
+  font-family: var(--font);
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: var(--text-sec);
+}
+
+/* ---------- Profile (Rounds) ---------- */
+
+.issue-profile {
+  padding: 2.5rem 0;
+}
+
+.issue-profile-name {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--black);
+  margin-bottom: 0.25rem;
+}
+
+.issue-profile-title {
+  font-family: var(--font);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+  margin-bottom: 2rem;
+}
+
+.issue-profile-question {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.1rem;
+  line-height: 1.5;
+  color: var(--black);
+  margin-bottom: 1rem;
+}
+
+.issue-profile .issue-body p {
+  font-size: 0.9rem;
+}
+
+/* ---------- Closing (Differential) ---------- */
+
+.issue-closing {
+  padding: 3rem 0;
+}
+
+.issue-closing .issue-body p {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.8;
+}
+
+/* ---------- Subscribe CTA ---------- */
+
+.issue-cta {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 4rem 1.5rem;
+  text-align: center;
+  border-top: 1px solid var(--border);
+}
+
+.issue-cta h3 {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: var(--black);
+  margin-bottom: 0.75rem;
+}
+
+.issue-cta p {
+  font-family: var(--font);
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+.issue-cta a,
+.issue-cta button {
+  display: inline-block;
+  font-family: var(--font);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--white);
+  background: var(--black);
+  border: none;
+  padding: 0.9rem 2.5rem;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+
+.issue-cta a:hover,
+.issue-cta button:hover {
+  background: var(--warm);
+}
+
+/* ---------- Issue Navigation ---------- */
+
+.issue-nav {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 3rem 1.5rem 4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid var(--border);
+}
+
+.issue-nav a {
+  font-family: var(--font);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.issue-nav a:hover {
+  color: var(--black);
+}
+
+.issue-nav .issue-nav-prev::before {
+  content: "\2190\00a0\00a0";
+}
+
+.issue-nav .issue-nav-next::after {
+  content: "\00a0\00a0\2192";
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 640px) {
+  .issue-header {
+    padding: 2rem 1rem 1.5rem;
+  }
+
+  .issue-title {
+    padding: 0 1rem 2rem;
+  }
+
+  .issue-section {
+    padding: 3rem 1rem;
+  }
+
+  .issue-section + .issue-section {
+    padding-top: 0;
+  }
+
+  .issue-cta {
+    padding: 3rem 1rem;
+  }
+
+  .issue-nav {
+    padding: 2rem 1rem 3rem;
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: stretch;
+    text-align: center;
+  }
+}
